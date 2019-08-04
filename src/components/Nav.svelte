@@ -1,49 +1,57 @@
 <script>
-	import { stores } from '@sapper/app';
+  import { stores, goto } from "@sapper/app";
+  import { post } from "../utils.js";
 
-	const { page, session } = stores();
+  const { page, session } = stores();
+
+  async function onSignOut(event) {
+    const response = await post(`auth/sign-out`);
+    deleteUidCookie();
+    $session.user = null;
+    goto("/blog");
+  }
+
+  function deleteUidCookie() {
+    document.cookie = "uid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+  }
 </script>
 
 <nav class="navbar navbar-light">
-	<div class="container">
-		<a rel='prefetch' class="navbar-brand" href=".">conduit</a>
-		<ul class="nav navbar-nav pull-xs-right">
-			<li class="nav-item">
-				<a rel='prefetch' class="nav-link" class:active="{$page.path === '/'}" href="/">Home</a>
-			</li>
+  <div class="container">
+    <!-- <a rel='prefetch' class="navbar-brand" href=".">Brand</a> -->
+    <ul class="nav navbar-nav pull-xs-right">
+      <li class="nav-item">
+        <a
+          rel="prefetch"
+          href="/publisher/drafts"
+          class="nav-link"
+          class:active={$page.path === '/publisher/drafts'}>
+          Drafts
+        </a>
+      </li>
 
-			{#if $session.user}
-				<li class="nav-item">
-					<a rel='prefetch' href="/editor" class="nav-link" class:active="{$page.path === '/editor'}">
-						<i class="ion-compose"></i>&nbsp;New Post
-					</a>
-				</li>
+      <li class="nav-item">
+        <a
+          rel="prefetch"
+          href="/publisher/published"
+          class="nav-link"
+          class:active={$page.path === '/publisher/published'}>
+          Published
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          rel="prefetch"
+          class="nav-link"
+          class:active={$page.path === '/'}
+          href="/blog">
+          Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <button on:click={onSignOut}>Sign out</button>
+      </li>
 
-				<li class="nav-item">
-					<a rel='prefetch' href="/settings" class="nav-link" class:active="{$page.path === '/settings'}">
-						<i class="ion-gear-a"></i>&nbsp;Settings
-					</a>
-				</li>
-
-				<li class="nav-item">
-					<a rel='prefetch' href='/profile/@{$session.user.username}' class="nav-link">
-						<!-- <img src={$user.image} class="user-pic" alt={$user.username}> -->
-						{$session.user.username}
-					</a>
-				</li>
-			{:else}
-				<li class="nav-item">
-					<a rel='prefetch' href="/login" class="nav-link" class:active="{$page.path === '/login'}">
-						Sign in
-					</a>
-				</li>
-
-				<li class="nav-item">
-					<a rel='prefetch' href="/register" class="nav-link" class:active="{$page.path === '/register'}">
-						Sign up
-					</a>
-				</li>
-			{/if}
-		</ul>
-	</div>
+    </ul>
+  </div>
 </nav>

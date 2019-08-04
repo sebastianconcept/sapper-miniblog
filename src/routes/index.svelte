@@ -41,12 +41,12 @@
 <h1>Sapper miniblog</h1>
 
 <figure>
-  <img alt="Borat" src="great-success.png" />
   <figcaption>HIGH FIVE!</figcaption>
 </figure>
 
+<p>Sapper miniblog installed and ready to customize!</p>
 <p>
-  <strong>
-    Try editing this file (src/routes/index.svelte) and start doing this.
-  </strong>
+  <a href="/blog">See posts</a>
+  or
+  <a href="/publisher">Manage articles</a>
 </p>

@@ -1,7 +1,7 @@
 <script>
   import { goto } from "@sapper/app";
-  import ArticleList from "../../../components/ArticleList/index.svelte";
-  import * as api from "../../../api.js";
+  import ArticleList from "../../../../components/ArticleList/index.svelte";
+  import * as api from "../../../../api.js";
 
   export let profile;
   export let favorites;

@@ -1,13 +1,11 @@
 <script>
-  import { goto, stores } from "@sapper/app";
-  import ListErrors from "../../components/ListErrors.svelte";
-  import { post } from "../../utils.js";
-
-  async function handleClick(event) {
-    const response = await post(`auth/sign-out`);
-  }
+  // import { goto, stores } from "@sapper/app";
+  // import { post } from "../../utils.js";
 </script>
 
-<p>Drafts</p>
-<p>Published</p>
-<button on:click={handleClick}>Logout</button>
+<p>Publisher section</p>
+<p>
+  <a href="/publisher/drafts">See drafts</a>
+  or
+  <a href="/publisher/published">See published articles</a>
+</p>

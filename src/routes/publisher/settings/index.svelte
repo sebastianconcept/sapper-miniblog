@@ -1,8 +1,8 @@
 <script>
   import { goto, stores } from "@sapper/app";
-  import ListErrors from "../../components/ListErrors.svelte";
+  import ListErrors from "../../../components/ListErrors.svelte";
   import SettingsForm from "./SettingsForm.svelte";
-  import { post } from "../../utils.js";
+  import { post } from "../../../utils.js";
 
   let inProgress;
   let errors;

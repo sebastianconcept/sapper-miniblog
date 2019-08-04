@@ -32,7 +32,8 @@ function hasSignedIn (req) {
 var sessionChecker = (req, res, next) => {
   console.log('sessionChecker url', req.url)
   if (!hasSignedIn(req) && req.url !== '/sign-in') {
-    res.redirect('sign-in')
+    // console.log(req.url)
+    // res.redirect('/sign-in')
   } else {
     next()
   }
@@ -73,7 +74,7 @@ app
    * your cookie still remains saved in the browser.
    */
   .use((req, res, next) => {
-    if (req.cookies.uid && !req.session.username) {
+    if (req.cookies.uid && !req.session.user) {
       res.clearCookie('uid')
     }
     next()
