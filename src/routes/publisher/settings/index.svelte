@@ -11,7 +11,6 @@
 
   async function save(event) {
     inProgress = true;
-
     const response = await post(`auth/save`, event.detail);
 
     errors = response.errors;
@@ -30,7 +29,7 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
 
-        <h1 class="text-xs-center">Your Settings</h1>
+        <h1 class="text-xs-center">Blog Settings</h1>
 
         <ListErrors {errors} />
 

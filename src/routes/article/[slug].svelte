@@ -15,7 +15,6 @@
   import marked from "marked";
 
   import ArticleMeta from "./ArticleMeta.svelte";
-  import CommentContainer from "./CommentContainer.svelte";
 
   export let article;
   export let slug;
@@ -64,13 +63,5 @@
     <hr />
 
     <div class="article-actions" />
-
-    <div class="row">
-      <CommentContainer
-        {slug}
-        {comments}
-        user={$session.user}
-        errors={commentErrors} />
-    </div>
   </div>
 </div>
