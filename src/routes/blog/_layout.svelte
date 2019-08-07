@@ -1,18 +1,9 @@
 <script context="module">
-  export function preload(page, session) {
-    if (!hasSinedIn(session)) {
-      this.redirect(302, "/sign-in");
-    }
 
-    function hasSinedIn(session) {
-      return !!session.user;
-    }
-  }
 </script>
 
 <script>
-  import Nav from "../../components/Nav.svelte";
-  export let segment;
+
 </script>
 
 <style>
@@ -30,8 +21,7 @@
   <div>Loading...</div>
 {/if} -->
 
-<Nav {segment} />
-
 <main>
+  <h1>Blog</h1>
   <slot />
 </main>

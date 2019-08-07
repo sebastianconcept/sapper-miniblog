@@ -14,7 +14,8 @@
     // TODO handle network errors
     errors = response.errors;
     if (!errors) {
-      goto("/publisher");
+      $session.user = response.user;
+      goto($session.initialPath || "/publisher");
     }
   }
 </script>

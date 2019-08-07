@@ -1,14 +1,5 @@
 <script>
-  // import { goto, stores } from "@sapper/app";
-  // import { onMount } from "svelte";
 
-  // const { page, session } = stores();
-
-  // onMount(() => {
-  //   if (!$session.user) {
-  //     goto("/blog");
-  //   }
-  // });
 </script>
 
 <style>

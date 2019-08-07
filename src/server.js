@@ -13,30 +13,8 @@ const FileStore = sessionFileStore(session)
 const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
 
-// const redirect = (req, res, destinationUrl) => {
-//   const str = `Redirecting to ${destinationUrl}`
-
-//   res.writeHead(302, {
-//     Location: destinationUrl,
-//     'Content-Type': 'text/plain',
-//     'Content-Length': str.length
-//   })
-
-//   res.end(str)
-// }
-
 function hasSignedIn (req) {
   return req.session.user && req.cookies.uid
-}
-// middleware function to check for logged-in users
-var sessionChecker = (req, res, next) => {
-  console.log('sessionChecker url', req.url)
-  if (!hasSignedIn(req) && req.url !== '/sign-in') {
-    // console.log(req.url)
-    // res.redirect('/sign-in')
-  } else {
-    next()
-  }
 }
 
 app
@@ -57,14 +35,18 @@ app
   )
   // initialize cookie-parser to allow us access the cookies stored in the browser.
   .use(cookieParser())
-  // .use(sessionChecker)
   .use(
     compression({ threshold: 0 }),
     sirv('static', { dev }),
     sapper.middleware({
-      session: req => ({
-        user: req.session && req.session.user
-      })
+      session: req => {
+        /** Stores the initial path to redirect after the sign-in guard */
+        !req.session.initialPath ? (req.session.initialPath = req.path) : null
+        return {
+          user: req.session && req.session.user,
+          initialPath: req.session && req.session.initialPath
+        }
+      }
     })
   )
   /**

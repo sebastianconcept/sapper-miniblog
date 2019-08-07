@@ -9,12 +9,6 @@
 
   const { session } = stores();
 
-  async function logout() {
-    await post(`auth/logout`);
-    $session.user = null;
-    goto("/");
-  }
-
   async function save(event) {
     inProgress = true;
 
@@ -28,7 +22,7 @@
 </script>
 
 <svelte:head>
-  <title>Settings • Conduit</title>
+  <title>Settings • miniblog</title>
 </svelte:head>
 
 <div class="settings-page">
@@ -44,9 +38,6 @@
 
         <hr />
 
-        <button class="btn btn-outline-danger" on:click={logout}>
-          Or click here to logout.
-        </button>
       </div>
     </div>
   </div>

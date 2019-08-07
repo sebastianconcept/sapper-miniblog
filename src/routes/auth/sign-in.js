@@ -7,7 +7,11 @@ export function post (req, res) {
   if (hasValidCredentials(credentials)) {
     res.setHeader('Content-Type', 'application/json')
     req.session.user = { email: validEmail }
-    res.end(JSON.stringify({ signIn: true }))
+    res.end(
+      JSON.stringify({
+        user: req.session.user
+      })
+    )
   } else {
     return res.end(JSON.stringify({ errors: { login: 'failed' } }))
   }
