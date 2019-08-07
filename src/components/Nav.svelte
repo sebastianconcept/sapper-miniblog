@@ -1,71 +1,57 @@
 <script>
-  export let segment;
+  import { stores, goto } from "@sapper/app";
+  import { post } from "../utils.js";
+
+  const { page, session } = stores();
+
+  async function onSignOut(event) {
+    const response = await post(`auth/sign-out`);
+    deleteUidCookie();
+    $session.user = null;
+    goto("/blog");
+  }
+
+  function deleteUidCookie() {
+    document.cookie = "uid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+  }
 </script>
 
-<style>
-  nav {
-    border-bottom: 1px solid rgba(255, 62, 0, 0.1);
-    font-weight: 300;
-    padding: 0 1em;
-  }
+<nav class="navbar navbar-light">
+  <div class="container">
+    <!-- <a rel='prefetch' class="navbar-brand" href=".">Brand</a> -->
+    <ul class="nav navbar-nav pull-xs-right">
+      <li class="nav-item">
+        <a
+          rel="prefetch"
+          href="/publisher/drafts"
+          class="nav-link"
+          class:active={$page.path === '/publisher/drafts'}>
+          Drafts
+        </a>
+      </li>
 
-  ul {
-    margin: 0;
-    padding: 0;
-  }
+      <li class="nav-item">
+        <a
+          rel="prefetch"
+          href="/publisher/published"
+          class="nav-link"
+          class:active={$page.path === '/publisher/published'}>
+          Published
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          rel="prefetch"
+          class="nav-link"
+          class:active={$page.path === '/'}
+          href="/blog">
+          Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <button on:click={onSignOut}>Sign out</button>
+      </li>
 
-  /* clearfix */
-  ul::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
-
-  li {
-    display: block;
-    float: left;
-  }
-
-  .selected {
-    position: relative;
-    display: inline-block;
-  }
-
-  .selected::after {
-    position: absolute;
-    content: "";
-    width: calc(100% - 1em);
-    height: 2px;
-    background-color: rgb(255, 62, 0);
-    display: block;
-    bottom: -1px;
-  }
-
-  a {
-    text-decoration: none;
-    padding: 1em 0.5em;
-    display: block;
-  }
-</style>
-
-<nav>
-  <ul>
-    <li>
-      <a class={segment === undefined ? 'selected' : ''} href=".">home</a>
-    </li>
-    <li>
-      <a class={segment === 'about' ? 'selected' : ''} href="about">about</a>
-    </li>
-
-    <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-    <li>
-      <a
-        rel="prefetch"
-        class={segment === 'blog' ? 'selected' : ''}
-        href="blog">
-        blog
-      </a>
-    </li>
-  </ul>
+    </ul>
+  </div>
 </nav>
