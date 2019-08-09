@@ -1,10 +1,9 @@
 <script>
-  import ArticleList from "../ArticleList";
+  import ArticleList from "../Publisher/ArticleList";
   import Search from "./Search";
   import ArticleFilter from "../ArticleFilter";
   import * as api from "../../api.js";
 
-  const showPublishingState = true;
   let selection = "published";
 </script>
 
@@ -15,5 +14,5 @@
 <div class="home-page">
   <ArticleFilter />
   <Search />
-  <ArticleList {showPublishingState} {selection} />
+  <ArticleList {selection} />
 </div>
