@@ -4,7 +4,7 @@
 </script>
 
 <div class="article-preview">
-  <a href="/articles/editor/{article.slug}" class="article-title-link">
+  <a href="/publisher/editor/{article.slug}" class="article-title-link">
     <h3>{article.title}</h3>
   </a>
   {#if article.subtitle}
