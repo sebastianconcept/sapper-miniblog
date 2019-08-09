@@ -1,18 +1,24 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
-	export let tags;
-	const dispatch = createEventDispatcher();
+  export let emailAddress = "";
+  const dispatch = createEventDispatcher();
+  function onSubmit(event) {
+    dispatch("subscribe", { email: emailAddress });
+  }
 </script>
 
-{#if tags}
-	<div className="tag-list">
-		{#each tags as tag}
-			<a href="." class="tag-default tag-pill" on:click='{() => dispatch("select", { tag })}'>
-				{tag}
-			</a>
-		{/each}
-	</div>
-{:else}
-	<div>Loading Tags...</div>
-{/if}
+<div class="publisher-search">
+  <form on:submit|preventDefault={onSubmit}>
+    <h4>Subscribe</h4>
+
+    <fieldset class="form-group">
+      <input
+        class="form-control form-control-lg"
+        type="text"
+        placeholder="Your email address"
+        bind:value={emailAddress} />
+    </fieldset>
+    <button on:click={onSubmit}>Subscribe</button>
+  </form>
+</div>

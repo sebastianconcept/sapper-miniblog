@@ -44,7 +44,7 @@
           rel="prefetch"
           class="nav-link"
           class:active={$page.path === '/'}
-          href="/blog">
+          href="/">
           Blog
         </a>
       </li>

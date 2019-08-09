@@ -6,10 +6,7 @@
 </script>
 
 <style>
-  p {
-    text-align: center;
-    margin: 0 auto;
-  }
+
 </style>
 
 <div class="home-page">

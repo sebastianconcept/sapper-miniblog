@@ -2,4 +2,4 @@
 
 </script>
 
-<h4>About</h4>
+<h2>Brand</h2>

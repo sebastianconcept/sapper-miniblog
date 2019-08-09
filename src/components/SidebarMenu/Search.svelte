@@ -1,18 +1,25 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
-	export let tags;
-	const dispatch = createEventDispatcher();
+  export let target = "";
+  const dispatch = createEventDispatcher();
+
+  function onSubmit(event) {
+    dispatch("search", { target: target });
+  }
 </script>
 
-{#if tags}
-	<div className="tag-list">
-		{#each tags as tag}
-			<a href="." class="tag-default tag-pill" on:click='{() => dispatch("select", { tag })}'>
-				{tag}
-			</a>
-		{/each}
-	</div>
-{:else}
-	<div>Loading Tags...</div>
-{/if}
+<div class="publisher-search">
+  <form on:submit|preventDefault={onSubmit}>
+    <h4>Search</h4>
+
+    <fieldset class="form-group">
+      <input
+        class="form-control form-control-lg"
+        type="text"
+        placeholder="Search title, tag or content"
+        bind:value={target} />
+    </fieldset>
+    <button on:click={onSubmit}>Find</button>
+  </form>
+</div>
