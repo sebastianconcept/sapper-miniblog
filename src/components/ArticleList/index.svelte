@@ -3,6 +3,9 @@
   import ArticlePreview from "./ArticlePreview.svelte";
   import * as api from "../../api.js";
 
+  export let selection = "published";
+  export let showPublishingState = false;
+
   export let tab,
     username = false;
   export let favorites = false;
@@ -48,7 +51,7 @@
   {:else}
     <div>
       {#each articles as article (article.slug)}
-        <ArticlePreview {article} user={$session.user} />
+        <ArticlePreview {article} user={$session.user} {showPublishingState} />
       {/each}
     </div>
   {/if}

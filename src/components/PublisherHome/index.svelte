@@ -1,11 +1,11 @@
 <script>
-  import BlogBrand from "./BlogBrand";
   import ArticleList from "../ArticleList";
-  import SidebarMenu from "../SidebarMenu";
+  import Search from "./Search";
+  import ArticleFilter from "../ArticleFilter";
   import * as api from "../../api.js";
 
-  const showPublishingState = false;
-  const selection = "published";
+  const showPublishingState = true;
+  let selection = "published";
 </script>
 
 <style>
@@ -13,7 +13,7 @@
 </style>
 
 <div class="home-page">
-  <BlogBrand />
+  <ArticleFilter />
+  <Search />
   <ArticleList {showPublishingState} {selection} />
-  <SidebarMenu />
 </div>
