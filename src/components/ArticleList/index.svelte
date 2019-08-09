@@ -1,8 +1,10 @@
 <script>
   import { stores } from "@sapper/app";
   import ArticlePreview from "./ArticlePreview.svelte";
-  import ListPagination from "./ListPagination.svelte";
   import * as api from "../../api.js";
+
+  export let selection = "published";
+  export let showPublishingState = false;
 
   export let tab,
     username = false;
@@ -49,10 +51,8 @@
   {:else}
     <div>
       {#each articles as article (article.slug)}
-        <ArticlePreview {article} user={$session.user} />
+        <ArticlePreview {article} user={$session.user} {showPublishingState} />
       {/each}
-
-      <ListPagination {articlesCount} page={parseInt($page.params.user, 10)} />
     </div>
   {/if}
 {:else}

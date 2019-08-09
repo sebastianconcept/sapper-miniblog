@@ -1,5 +1,9 @@
 <script>
-  import Home from "../components/Home.svelte";
+  import Home from "../components/Home";
 </script>
+
+<svelte:head>
+  <title>Miniblog</title>
+</svelte:head>
 
 <Home />

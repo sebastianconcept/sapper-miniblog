@@ -30,8 +30,6 @@
   <div>Loading...</div>
 {/if} -->
 
-<Nav {segment} />
-
 <main>
   <slot />
 </main>

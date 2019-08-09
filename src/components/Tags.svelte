@@ -1,18 +1,11 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
-
-	export let tags;
-	const dispatch = createEventDispatcher();
+  export let tags;
 </script>
 
 {#if tags}
-	<div className="tag-list">
-		{#each tags as tag}
-			<a href="." class="tag-default tag-pill" on:click='{() => dispatch("select", { tag })}'>
-				{tag}
-			</a>
-		{/each}
-	</div>
-{:else}
-	<div>Loading Tags...</div>
+  <ul class="tags">
+    {#each Object.keys(tags) as key}
+      <li>{key} {tags[key]}</li>
+    {/each}
+  </ul>
 {/if}
