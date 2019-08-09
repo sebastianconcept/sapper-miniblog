@@ -1,7 +1,4 @@
 <script context="module">
-  export let selection = "published";
-  export let currentPage = 1;
-
   export function preload({ params }) {
     // fetch articles
     // this.fetch...
@@ -13,12 +10,13 @@
 
   import { stores } from "@sapper/app";
   import * as api from "../../../api.js";
+  export let selection = "published";
+  export let currentPage = 1;
 
   const { session, page } = stores();
   let articles;
   let query;
   let articlesCount;
-  let selection = "all";
 
   $: {
     const endpoint = "articles";

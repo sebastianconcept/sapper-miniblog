@@ -11,6 +11,8 @@ export function getArticles (selection) {
     articles = all
   } else if (selection === 'published') {
     articles = all.filter(e => !!e.publishedAt)
+  } else if (selection === 'drafts') {
+    articles = all.filter(e => !e.publishedAt)
   }
 
   return {
