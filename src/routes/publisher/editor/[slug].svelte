@@ -11,9 +11,7 @@
 
 <script>
   import { onMount } from "svelte";
-  import { stores } from "@sapper/app";
-
-  // import ArticleMeta from "./ArticleMeta.svelte";
+  import { goto, stores } from "@sapper/app";
 
   export let article;
   export let slug;
@@ -24,8 +22,6 @@
   let subtitle = article.subtitle || "";
   let body = article.body || "";
 
-  // $: markup = marked(article.body);
-
   onMount(() => {
     import("easymde").then(module => {
       const EasyMDE = module.default;
@@ -33,12 +29,23 @@
         element: document.getElementById("editor")
       });
       editor.value(body);
+      setInterval(() => {
+        save();
+      }, 5000);
     });
-    // const easyMDE = new EasyMDE();
-    // api.get(`articles/${slug}/comments`).then(res => {
-    //   comments = res.comments;
-    // });
   });
+
+  function save() {
+    article.title = title;
+    article.subtitle = subtitle;
+    article.body = editor.value();
+    // @TODO actually save the article.
+  }
+
+  function onClose() {
+    save();
+    goto("/publisher");
+  }
 
   // onDestroy(() => {});
 </script>
@@ -51,6 +58,7 @@
 </svelte:head>
 
 <div class="article-editor">
+  <button on:click={onClose}>Close</button>
   <div id="editor-container">
     <input bind:value={title} placeholder="Title" />
     <input bind:value={subtitle} placeholder="Subtitle" />
