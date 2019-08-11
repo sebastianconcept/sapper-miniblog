@@ -1,11 +1,10 @@
 <script>
-  import ArticleList from "../ArticleList";
+  import ArticleList from "../Publisher/ArticleList";
   import Search from "./Search";
   import ArticleFilter from "../ArticleFilter";
   import * as api from "../../api.js";
 
-  const showPublishingState = true;
-  let selection = "published";
+  let selection = "drafts";
 </script>
 
 <style>
@@ -13,7 +12,11 @@
 </style>
 
 <div class="home-page">
-  <ArticleFilter />
+  <ArticleFilter
+    {selection}
+    on:drafts={() => (selection = 'drafts')}
+    on:published={() => (selection = 'published')}
+    on:all={() => (selection = 'all')} />
   <Search />
-  <ArticleList {showPublishingState} {selection} />
+  <ArticleList {selection} />
 </div>

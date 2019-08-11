@@ -6,5 +6,7 @@ export function get (req, res) {
 }
 
 function getArticle (slug) {
-  return { article: getArticles().articles.find(e => e.slug === slug) }
+  return {
+    article: getArticles('all').articles.find(e => e.slug === slug)
+  }
 }

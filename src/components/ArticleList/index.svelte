@@ -4,7 +4,6 @@
   import * as api from "../../api.js";
 
   export let selection = "published";
-  export let showPublishingState = false;
 
   export let tab,
     username = false;
@@ -22,7 +21,8 @@
     const endpoint = tab === "feed" ? "articles/feed" : "articles";
     const page_size = tab === "feed" ? 5 : 10;
 
-    let params = `limit=${page_size}&offset=${(p - 1) * page_size}`;
+    let params = `selection=${selection}&limit=${page_size}&offset=${(p - 1) *
+      page_size}`;
     if (tab === "tag") params += `&tag=${tag}`;
     if (tab === "profile")
       params += `&${favorites ? "favorited" : "author"}=${encodeURIComponent(
@@ -51,7 +51,7 @@
   {:else}
     <div>
       {#each articles as article (article.slug)}
-        <ArticlePreview {article} user={$session.user} {showPublishingState} />
+        <ArticlePreview {article} user={$session.user} />
       {/each}
     </div>
   {/if}

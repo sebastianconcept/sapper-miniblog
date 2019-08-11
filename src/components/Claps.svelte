@@ -1,5 +1,5 @@
 <script>
-  export let quantity;
+  export let quantity = 0;
 </script>
 
 <style>

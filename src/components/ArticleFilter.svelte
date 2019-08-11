@@ -3,7 +3,7 @@
   const dispatch = createEventDispatcher();
 
   async function onPublished(event) {
-    dispatch("publihed");
+    dispatch("published");
   }
 
   async function onDrafts(event) {

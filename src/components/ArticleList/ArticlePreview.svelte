@@ -1,6 +1,5 @@
 <script>
   export let article;
-  export let showPublishingState = false;
 </script>
 
 <div class="article-preview">
@@ -17,9 +16,6 @@
   <a href="/article/{article.slug}" rel="prefetch" class="preview-link">
     <h1>{article.title}</h1>
     <p>{article.description}</p>
-    {#if showPublishingState}
-      <p>Published</p>
-    {/if}
     <span>Read more...</span>
     <ul class="tag-list">
       {#each article.tagList as tag}
