@@ -1,12 +1,11 @@
-import { getArticles } from '.'
+import { db } from '../../../db'
 
-export function get (req, res) {
-  const answer = getArticle(req.params.slug)
-  res.end(JSON.stringify(answer))
-}
-
-function getArticle (slug) {
-  return {
-    article: getArticles('all').articles.find(e => e.slug === slug)
+export async function get (req, res) {
+  const { slug } = req.params
+  const found = await db.articles.findOne({ slug })
+  if (found) {
+    res.end(JSON.stringify(found))
+  } else {
+    res.end(null)
   }
 }

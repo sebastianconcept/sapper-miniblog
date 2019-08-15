@@ -18,7 +18,7 @@
 
   <div class="info">
     <p class="author">{article.author.username}</p>
-    <span class="date">{new Date(article.createdAt).toDateString()}</span>
+    <span class="date">{article.createdAt}</span>
   </div>
 
   {#if canModify}

@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import sessionFileStore from 'session-file-store'
 import * as sapper from '@sapper/server'
+import { db } from './db'
 
 const app = express()
 const FileStore = sessionFileStore(session)

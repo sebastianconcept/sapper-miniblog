@@ -18,7 +18,7 @@
     <p>{article.description}</p>
     <span>Read more...</span>
     <ul class="tag-list">
-      {#each article.tagList as tag}
+      {#each article.tags as tag}
         <li class="tag-default tag-pill tag-outline">{tag}</li>
       {/each}
     </ul>

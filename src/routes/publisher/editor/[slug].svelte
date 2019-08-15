@@ -3,9 +3,29 @@
 
   export async function preload({ params }) {
     const { slug } = params;
-    const { article } = await api.get(`articles/${params.slug}`, null);
+    let article;
+    if (slug === "new") {
+      article = newArticle();
+    } else {
+      article = await api.get(`articles/${params.slug}`, null);
+    }
 
     return { article, slug };
+  }
+
+  function newArticle() {
+    return {
+      title: undefined,
+      subtitle: undefined,
+      slug: undefined,
+      body: undefined,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      publishedAt: undefined,
+      tags: [],
+      description: undefined,
+      clapsCount: 0
+    };
   }
 </script>
 
@@ -15,6 +35,8 @@
 
   export let article;
   export let slug;
+
+  const autosaveDuration = 10000; // 10 sec
 
   const { session } = stores();
   let editor;
@@ -29,17 +51,20 @@
         element: document.getElementById("editor")
       });
       editor.value(body);
-      setInterval(() => {
-        save();
-      }, 5000);
+      // setInterval(() => {
+      //   save();
+      // }, autosaveDuration);
     });
   });
 
-  function save() {
+  async function save() {
     article.title = title;
     article.subtitle = subtitle;
     article.body = editor.value();
-    // @TODO actually save the article.
+    const id = await api.post("articles", article);
+    if (!article._id) {
+      article._id = id;
+    }
   }
 
   function onClose() {
@@ -66,7 +91,7 @@
   </div>
 
   <ul class="tag-list">
-    {#each article.tagList as tag}
+    {#each article.tags as tag}
       <li class="tag-default tag-pill tag-outline">{tag}</li>
     {/each}
   </ul>

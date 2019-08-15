@@ -3,7 +3,8 @@
 
   export async function preload({ params }) {
     const { slug } = params;
-    const { article } = await api.get(`articles/${params.slug}`, null);
+
+    const { article } = await api.get(`articles/${slug}`, null);
 
     return { article, slug };
   }
@@ -25,11 +26,11 @@
     comments = []; // we'll lazy-load these in onMount
   $: markup = marked(article.body);
 
-  onMount(() => {
-    api.get(`articles/${slug}/comments`).then(res => {
-      comments = res.comments;
-    });
-  });
+  // onMount(() => {
+  //   api.get(`articles/${slug}/comments`).then(res => {
+  //     comments = res.comments;
+  //   });
+  // });
 </script>
 
 <svelte:head>
@@ -53,7 +54,7 @@
         </div>
 
         <ul class="tag-list">
-          {#each article.tagList as tag}
+          {#each article.tags as tag}
             <li class="tag-default tag-pill tag-outline">{tag}</li>
           {/each}
         </ul>
