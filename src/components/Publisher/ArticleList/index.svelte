@@ -10,7 +10,9 @@
 
   import { stores } from "@sapper/app";
   import * as api from "../../../api.js";
+
   export let selection = "published";
+  export let filter = "";
   export let currentPage = 1;
 
   const { session, page } = stores();
@@ -35,6 +37,9 @@
       query,
       $session.user && $session.user.token
     ));
+  }
+
+  $: {
   }
 </script>
 

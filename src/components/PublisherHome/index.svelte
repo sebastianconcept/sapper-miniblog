@@ -6,6 +6,14 @@
   import { goto } from "@sapper/app";
 
   let selection = "drafts";
+  let filter = "";
+  let articleList;
+
+  function onSearch(event) {
+    filter = event.detail || "";
+    console.log("onSearch", filter);
+    // console.log("filter", articleList);
+  }
 </script>
 
 <style>
@@ -21,6 +29,7 @@
   <button class="button" on:click={() => goto('/publisher/editor/new')}>
     New Article
   </button>
-  <Search />
-  <ArticleList {selection} />
+  <Search on:search={onSearch} />
+  <ArticleList {selection} {filter} />
+  <!-- <ArticleList {selection} bind:this={articleList} /> -->
 </div>
