@@ -6,13 +6,11 @@
   import { goto } from "@sapper/app";
 
   let selection = "drafts";
-  let filter = "";
+  let filterTarget = "";
   let articleList;
 
   function onSearch(event) {
-    filter = event.detail || "";
-    console.log("onSearch", filter);
-    // console.log("filter", articleList);
+    filterTarget = event.detail || "";
   }
 </script>
 
@@ -30,6 +28,6 @@
     New Article
   </button>
   <Search on:search={onSearch} />
-  <ArticleList {selection} {filter} />
+  <ArticleList {selection} {filterTarget} />
   <!-- <ArticleList {selection} bind:this={articleList} /> -->
 </div>
