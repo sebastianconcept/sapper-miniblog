@@ -1,9 +1,10 @@
 import { db } from '../../../db'
 import slugify from 'slugify'
+import { remove as removeDiacritics } from 'diacritics'
 
 export async function get (req, res) {
-  const selection = req.query.selection
-  const answer = await getArticles(selection)
+  const { selection, filter } = req.query
+  const answer = await getArticles(selection, filter)
   res.end(JSON.stringify(answer))
 }
 
@@ -30,7 +31,7 @@ function updateSlug (article) {
   })
 }
 
-export async function getArticles (selection) {
+export async function getArticles (selection, filterTarget) {
   let query
   if (selection === 'all') {
     query = {} // all
@@ -39,12 +40,22 @@ export async function getArticles (selection) {
   } else if (selection === 'drafts') {
     query = { publishedAt: { $exists: false } }
   }
-  const articles = await db.articles.find(query)
-
-  console.log('query', query)
-  console.log('articles', articles)
+  const all = await db.articles.find(query)
+  const articles = all.filter(article => isArticleMatch(article, filterTarget))
   return {
     articles: articles,
     articlesCount: articles.length
   }
+}
+
+function isArticleMatch (article, filterTarget) {
+  return ['title', 'subtitle', 'body'].some(propertyName =>
+    !filterTarget
+      ? true
+      : !!removeDiacritics(article[propertyName])
+        .toLowerCase()
+        .match(
+          new RegExp(`.*${removeDiacritics(filterTarget).toLowerCase()}.*`)
+        )
+  )
 }

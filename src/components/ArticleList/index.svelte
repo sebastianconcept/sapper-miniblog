@@ -5,12 +5,6 @@
 
   export let selection = "published";
 
-  export let tab,
-    username = false;
-  export let favorites = false;
-  export let tag;
-  export let p;
-
   const { session, page } = stores();
 
   let query;
@@ -47,7 +41,7 @@
 
 {#if articles}
   {#if articles.length === 0}
-    <div class="article-preview">No articles are here... yet.</div>
+    <div class="article-preview">No articles are here...</div>
   {:else}
     <div>
       {#each articles as article (article.slug)}
