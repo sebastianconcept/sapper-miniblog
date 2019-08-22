@@ -6,6 +6,7 @@
 </script>
 
 <script>
+  import InfinitePaginator from "../../InfinitePaginator";
   import ArticlePreview from "./ArticlePreview";
 
   import { stores } from "@sapper/app";
@@ -14,25 +15,31 @@
   export let selection = "published";
   export let filter = "";
   export let currentPage = 1;
+  let isLastPage = false;
   export let filterTarget = "";
 
   const { session, page } = stores();
   let articles = [];
   let query;
   let articlesCount;
+  const pageSize = 10;
+
+  $: {
+    selection;
+    reset();
+  }
 
   $: {
     const endpoint = "articles";
-    const page_size = 10;
     let params = "";
     if (filterTarget) {
       params = `selection=${selection}&filter=${
         filterTarget.target
-      }&limit=${page_size}&offset=${(currentPage - 1) * page_size}`;
+      }&limit=${pageSize}&offset=${(currentPage - 1) * pageSize}`;
     } else {
-      params = `selection=${selection}&limit=${page_size}&offset=${(currentPage -
+      params = `selection=${selection}&limit=${pageSize}&offset=${(currentPage -
         1) *
-        page_size}`;
+        pageSize}`;
     }
     query = `${endpoint}?${params}`;
   }
@@ -40,10 +47,26 @@
   $: query && getData();
   async function getData() {
     // TODO do we need some error handling here?
-    ({ articles, articlesCount } = await api.get(
-      query,
-      $session.user && $session.user.token
-    ));
+    const answer = await api.get(query, $session.user && $session.user.token);
+    articles = articles.concat(...answer.articles);
+    articlesCount = answer.articlesCount;
+  }
+
+  function reset() {
+    articles = [];
+    currentPage = 1;
+    articlesCount = null;
+    isLastPage = false;
+  }
+
+  function onPaginate(event) {
+    if (articlesCount < pageSize) {
+      isLastPage = true;
+    }
+
+    if (!isLastPage) {
+      currentPage = currentPage + 1;
+    }
   }
 </script>
 
@@ -58,6 +81,7 @@
             <ArticlePreview {article} />
           </li>
         {/each}
+        <InfinitePaginator on:paginate={onPaginate} />
       </ul>
     {/if}
   {:else}

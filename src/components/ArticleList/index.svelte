@@ -12,16 +12,12 @@
   let articlesCount;
 
   $: {
-    const endpoint = tab === "feed" ? "articles/feed" : "articles";
-    const page_size = tab === "feed" ? 5 : 10;
+    const endpoint = "articles";
+    const page_size = 10;
+    const p = 1;
 
     let params = `selection=${selection}&limit=${page_size}&offset=${(p - 1) *
       page_size}`;
-    if (tab === "tag") params += `&tag=${tag}`;
-    if (tab === "profile")
-      params += `&${favorites ? "favorited" : "author"}=${encodeURIComponent(
-        username
-      )}`;
 
     query = `${endpoint}?${params}`;
   }
