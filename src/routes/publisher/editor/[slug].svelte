@@ -51,9 +51,9 @@
         element: document.getElementById("editor")
       });
       editor.value(body);
-      // setInterval(() => {
-      //   save();
-      // }, autosaveDuration);
+      setInterval(() => {
+        save();
+      }, autosaveDuration);
     });
   });
 

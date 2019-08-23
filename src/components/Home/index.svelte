@@ -4,8 +4,14 @@
   import SidebarMenu from "../SidebarMenu";
   import * as api from "../../api.js";
 
+  export let filterTarget;
+
   const showPublishingState = false;
   const selection = "published";
+
+  function onSearch(event) {
+    filterTarget = event.detail;
+  }
 </script>
 
 <style>
@@ -14,6 +20,6 @@
 
 <div class="home-page">
   <BlogBrand />
-  <ArticleList {showPublishingState} {selection} />
-  <SidebarMenu />
+  <ArticleList {showPublishingState} {selection} {filterTarget} />
+  <SidebarMenu on:search={onSearch} />
 </div>
