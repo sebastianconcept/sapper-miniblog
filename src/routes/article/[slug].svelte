@@ -23,6 +23,5 @@
 </svelte:head>
 
 <div class="article-page">
-
   <Article {article} />
 </div>
