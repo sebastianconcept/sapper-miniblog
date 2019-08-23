@@ -14,9 +14,9 @@
 <div class="sidebar">
   <Brand />
   <Search />
-  <Subscribe />
-  <TopTen />
-  <Tags />
+  <!-- <Subscribe /> -->
+  <!-- <TopTen /> -->
+  <!-- <Tags /> -->
   <About />
 
 </div>
