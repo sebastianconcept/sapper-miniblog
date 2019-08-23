@@ -3,8 +3,16 @@ import slugify from 'slugify'
 import { remove as removeDiacritics } from 'diacritics'
 
 export async function get (req, res) {
-  const { selection, filter } = req.query
-  const answer = await getArticles(selection, filter)
+  const { selection, filter, limit, offset } = req.query
+  if (!limit || !offset) {
+    return res.end(JSON.stringify({ articles: [], articlesCount: 0 }))
+  }
+  const answer = await getArticles(
+    selection,
+    filter,
+    parseInt(limit),
+    parseInt(offset)
+  )
   res.end(JSON.stringify(answer))
 }
 
@@ -31,7 +39,7 @@ function updateSlug (article) {
   })
 }
 
-export async function getArticles (selection, filterTarget) {
+export async function getArticles (selection, filterTarget, limit, offset) {
   let query
   if (selection === 'all') {
     query = {} // all
@@ -42,9 +50,12 @@ export async function getArticles (selection, filterTarget) {
   }
   const all = await db.articles.find(query)
   const articles = all.filter(article => isArticleMatch(article, filterTarget))
+  const start = offset
+  const end = start + limit
+  const filteredArticles = articles.slice(start, end)
   return {
-    articles: articles,
-    articlesCount: articles.length
+    articles: filteredArticles,
+    articlesCount: filteredArticles.length
   }
 }
 
