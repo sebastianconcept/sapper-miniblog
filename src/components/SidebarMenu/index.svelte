@@ -5,6 +5,13 @@
   import TopTen from "./TopTen";
   import Tags from "./Tags";
   import About from "./About";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+
+  function onSearch(event) {
+    dispatch("search", event.detail);
+  }
 </script>
 
 <style>
@@ -13,7 +20,7 @@
 
 <div class="sidebar">
   <Brand />
-  <Search />
+  <Search on:search={onSearch} />
   <!-- <Subscribe /> -->
   <!-- <TopTen /> -->
   <!-- <Tags /> -->

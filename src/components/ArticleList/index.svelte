@@ -17,6 +17,11 @@
   const pageSize = 10;
 
   $: {
+    filterTarget;
+    reset();
+  }
+
+  $: {
     const endpoint = "articles";
     let params = "";
     if (filterTarget) {
@@ -26,6 +31,7 @@
     } else {
       params = `limit=${pageSize}&offset=${(currentPage - 1) * pageSize}`;
     }
+
     query = `${endpoint}?${params}`;
   }
 

@@ -26,6 +26,7 @@
 
   $: {
     selection;
+    filterTarget;
     reset();
   }
 

@@ -19,7 +19,7 @@
         type="text"
         placeholder="Search title, tag or content"
         bind:value={target} />
+      <button>Find</button>
     </fieldset>
-    <button on:click={onSubmit}>Find</button>
   </form>
 </div>
