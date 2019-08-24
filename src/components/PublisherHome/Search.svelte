@@ -1,22 +1,27 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { debounce } from "throttle-debounce";
-  export let target = "";
+  export let searchTarget = "";
 
   const dispatch = createEventDispatcher();
   const searchDebouceDelay = 500;
 
   function onSubmit(event) {
-    dispatch("search", { target: target });
+    dispatch("search", { target: searchTarget });
   }
 
   function basicSearch() {
     // console.log("basicSearch", target);
-    dispatch("search", { target });
+    dispatch("search", { target: searchTarget });
   }
 
   function onSearch() {
     return debounce(searchDebouceDelay, () => basicSearch());
+  }
+
+  function onReset(event) {
+    searchTarget = "";
+    onSubmit(event);
   }
 </script>
 
@@ -28,8 +33,9 @@
         type="text"
         placeholder="Search title, tag or content"
         on:keyup={onSearch()}
-        bind:value={target} />
+        bind:value={searchTarget} />
+      <button>Find</button>
+      <button on:click={onReset}>Reset</button>
     </fieldset>
-    <button on:click={onSubmit}>Find</button>
   </form>
 </div>

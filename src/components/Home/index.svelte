@@ -1,17 +1,15 @@
 <script>
+  import { onMount } from "svelte";
+  import { stores } from "@sapper/app";
+  const { session, page } = stores();
+
   import BlogBrand from "./BlogBrand";
   import ArticleList from "../ArticleList";
   import SidebarMenu from "../SidebarMenu";
-  import * as api from "../../api.js";
 
-  export let filterTarget;
-
+  let queryParams = {};
   const showPublishingState = false;
   const selection = "published";
-
-  function onSearch(event) {
-    filterTarget = event.detail;
-  }
 </script>
 
 <style>
@@ -20,6 +18,6 @@
 
 <div class="home-page">
   <BlogBrand />
-  <ArticleList {showPublishingState} {selection} {filterTarget} />
-  <SidebarMenu on:search={onSearch} />
+  <ArticleList {showPublishingState} {selection} />
+  <SidebarMenu />
 </div>

@@ -1,5 +1,6 @@
 <script>
   import { stores } from "@sapper/app";
+
   import ArticlePreview from "./ArticlePreview.svelte";
   import InfinitePaginator from "../InfinitePaginator";
   import * as api from "../../api.js";
@@ -7,7 +8,6 @@
   export let filter = "";
   export let currentPage = 1;
   let isLastPage = false;
-  export let filterTarget = "";
 
   const { session, page } = stores();
 
@@ -17,16 +17,16 @@
   const pageSize = 10;
 
   $: {
-    filterTarget;
+    $session.search;
     reset();
   }
 
   $: {
     const endpoint = "articles";
     let params = "";
-    if (filterTarget) {
+    if ($session.search) {
       params = `filter=${
-        filterTarget.target
+        $session.search
       }&limit=${pageSize}&offset=${(currentPage - 1) * pageSize}`;
     } else {
       params = `limit=${pageSize}&offset=${(currentPage - 1) * pageSize}`;
