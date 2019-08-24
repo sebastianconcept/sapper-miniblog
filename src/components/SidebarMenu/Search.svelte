@@ -7,6 +7,11 @@
   function onSubmit(event) {
     dispatch("search", { target: target });
   }
+
+  function onReset(event) {
+    target = "";
+    onSubmit(event);
+  }
 </script>
 
 <div class="publisher-search">
@@ -19,7 +24,10 @@
         type="text"
         placeholder="Search title, tag or content"
         bind:value={target} />
-      <button>Find</button>
+      <button class="button">Find</button>
+      <button class="button" on:click={onReset} disabled={!target}>
+        reset
+      </button>
     </fieldset>
   </form>
 </div>
