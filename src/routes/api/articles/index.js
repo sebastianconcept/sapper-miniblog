@@ -3,10 +3,20 @@ import slugify from 'slugify'
 import { remove as removeDiacritics } from 'diacritics'
 
 export async function get (req, res) {
-  const { selection, filter, limit, offset } = req.query
+  const { filter, limit, offset } = req.query
+  let selection
+
   if (!limit || !offset) {
     return res.end(JSON.stringify({ articles: [], articlesCount: 0 }))
   }
+
+  // If there is no user in the session, we force to return only published articles.
+  if (!req.session.user) {
+    selection = 'published'
+  } else {
+    selection = req.query.selection || 'published'
+  }
+
   const answer = await getArticles(
     selection,
     filter,

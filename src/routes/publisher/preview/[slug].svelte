@@ -12,15 +12,31 @@
 </script>
 
 <script>
+  import { goto } from "@sapper/app";
+
   export let article;
   export let slug;
 
+  function onEdit() {
+    goto(`/publisher/editor/${article.slug}`);
+  }
+
   function onPublish() {
-    console.log("onPublish");
+    const confirmed = confirm("Publish?");
+    if (confirmed) {
+      console.log("publishing");
+      publish();
+    }
+  }
+
+  function publish() {
+    article.publishedAt = new Date();
+    api.post("articles", article);
   }
 </script>
 
 <div class="article-editor">
+  <button on:click={onEdit}>Edit</button>
   <button on:click={onPublish}>Publish</button>
   <Article {article} />
 </div>

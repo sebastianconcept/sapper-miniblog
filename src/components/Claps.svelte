@@ -1,9 +1,11 @@
 <script>
-  export let quantity = 0;
+  export let quantity;
 </script>
 
 <style>
 
 </style>
 
-<h3>{quantity}</h3>
+{#if quantity}
+  <div>{quantity}</div>
+{/if}

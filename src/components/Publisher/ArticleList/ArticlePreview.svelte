@@ -5,13 +5,10 @@
 
 <div class="article-preview">
   <a href="/publisher/editor/{article.slug}" class="article-title-link">
-    <h3>{article.title}</h3>
+    <h2>{article.title}</h2>
   </a>
-  {#if article.subtitle}
-    <h4>{article.subtitle}</h4>
-  {/if}
-  <div>{article.exerpt}</div>
-  <div class="article-preview-tags">{article.tags}</div>
+  <h3>{article.subtitle}</h3>
+  <!-- <div>{article.exerpt}</div> -->
   <Claps quantity={article.claps} />
   <div class="article-preview-date">{article.createdAt.toString()}</div>
 </div>

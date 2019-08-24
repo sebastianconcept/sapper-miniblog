@@ -33,7 +33,6 @@
 
 <script>
   import { onMount } from "svelte";
-  import { goto, stores } from "@sapper/app";
 
   export let article;
   export let slug;
