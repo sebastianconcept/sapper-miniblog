@@ -1,11 +1,9 @@
 <script>
   import { stores } from "@sapper/app";
-
   import ArticlePreview from "./ArticlePreview.svelte";
   import InfinitePaginator from "../InfinitePaginator";
   import * as api from "../../api.js";
 
-  export let filter = "";
   export let currentPage = 1;
   let isLastPage = false;
 

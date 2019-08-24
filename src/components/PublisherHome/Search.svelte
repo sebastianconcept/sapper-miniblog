@@ -1,18 +1,21 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import { debounce } from "throttle-debounce";
+  import { stores } from "@sapper/app";
+
   export let searchTarget = "";
 
-  const dispatch = createEventDispatcher();
+  const { session } = stores();
   const searchDebouceDelay = 500;
 
   function onSubmit(event) {
-    dispatch("search", { target: searchTarget });
+    basicSearch();
   }
 
   function basicSearch() {
-    // console.log("basicSearch", target);
-    dispatch("search", { target: searchTarget });
+    // dispatch("search", { target: searchTarget });
+    if (searchTarget !== $session.search) {
+      $session.search = searchTarget;
+    }
   }
 
   function onSearch() {
@@ -20,8 +23,10 @@
   }
 
   function onReset(event) {
-    searchTarget = "";
-    onSubmit(event);
+    if (!!searchTarget) {
+      searchTarget = "";
+      onSubmit(event);
+    }
   }
 </script>
 
@@ -35,7 +40,7 @@
         on:keyup={onSearch()}
         bind:value={searchTarget} />
       <button>Find</button>
-      <button on:click={onReset}>Reset</button>
+      <button on:click|preventDefault={onReset}>Reset</button>
     </fieldset>
   </form>
 </div>
