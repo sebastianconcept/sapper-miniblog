@@ -50,7 +50,11 @@
     goto(`/publisher/preview/${article.slug}`);
   }
 
-  // onDestroy(() => {});
+  function onUnpublish() {
+    delete article.publishedAt;
+    save();
+    goto(`/publisher`);
+  }
 </script>
 
 <svelte:head>
@@ -63,6 +67,9 @@
 <div class="article-editor">
   <button on:click={onClose}>Close</button>
   <button on:click={onPreview}>Preview</button>
+  {#if article.publishedAt}
+    <button on:click={onUnpublish}>Unpublish</button>
+  {/if}
   <div id="editor-container">
     <input bind:value={title} placeholder="Title" />
     <input bind:value={subtitle} placeholder="Subtitle" />
