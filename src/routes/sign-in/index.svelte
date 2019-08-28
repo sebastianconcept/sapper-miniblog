@@ -10,12 +10,18 @@
   let errors = null;
 
   async function submit(event) {
+    let initialPath;
     const response = await post(`auth/sign-in`, { email, password });
     // TODO handle network errors
     errors = response.errors;
     if (!errors) {
       $session.user = response.user;
-      goto($session.initialPath || "/publisher");
+      console.log("$session.initialPath", $session.initialPath);
+
+      if ($session.initialPath === "/") {
+        initialPath = "/publisher";
+      }
+      goto(initialPath || $session.initialPath);
     }
   }
 </script>
