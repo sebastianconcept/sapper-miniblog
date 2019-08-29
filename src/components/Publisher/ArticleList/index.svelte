@@ -26,16 +26,16 @@
 
   $: {
     selection;
-    filterTarget;
+    $session.search;
     reset();
   }
 
   $: {
     const endpoint = "articles";
     let params = "";
-    if (filterTarget) {
+    if ($session.search) {
       params = `selection=${selection}&filter=${
-        filterTarget.target
+        $session.search
       }&limit=${pageSize}&offset=${(currentPage - 1) * pageSize}`;
     } else {
       params = `selection=${selection}&limit=${pageSize}&offset=${(currentPage -

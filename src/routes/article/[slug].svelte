@@ -10,12 +10,16 @@
 </script>
 
 <script>
-  import { stores } from "@sapper/app";
+  import { goto, stores } from "@sapper/app";
 
   import Article from "../../components/Article";
+  import SidebarMenu from "../../components/SidebarMenu";
 
   export let article;
-  export let slug;
+
+  function onSearch(event) {
+    goto(`/?search=${event.detail.target}`);
+  }
 </script>
 
 <svelte:head>
@@ -23,6 +27,7 @@
 </svelte:head>
 
 <div class="article-page">
-
   <Article {article} />
+  <SidebarMenu on:search={onSearch} />
+
 </div>
