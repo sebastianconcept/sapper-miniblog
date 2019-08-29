@@ -60,11 +60,17 @@
   }
 </script>
 
+<style>
+  .articles {
+    list-style-type: none;
+  }
+</style>
+
 {#if articles}
   {#if articles.length === 0}
     <div class="article-preview">No articles are here...</div>
   {:else}
-    <ul class="">
+    <ul class="articles">
       {#each articles as article (article.slug)}
         <li class="article-editor-preview">
           <ArticlePreview {article} />
