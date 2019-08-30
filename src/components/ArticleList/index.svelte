@@ -80,5 +80,5 @@
     </ul>
   {/if}
 {:else}
-  <div class="article-preview">Loading...</div>
+  <div class="loading loading-lg" />
 {/if}

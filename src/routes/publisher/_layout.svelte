@@ -27,7 +27,7 @@
 </style>
 
 <!-- {#if preloading}
-  <div>Loading...</div>
+  <div class="loading loading-lg" />
 {/if} -->
 
 <main>
