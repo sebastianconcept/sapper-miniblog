@@ -27,14 +27,16 @@
 
     <fieldset class="form-group">
       <input
-        class="form-control form-control-lg"
+        class="form-input "
         type="text"
         placeholder="Search title, tag or content"
         bind:value={searchTarget} />
-      <button class="button">Find</button>
-      <button class="button" on:click={onReset} disabled={!searchTarget}>
-        reset
-      </button>
+      <div class="btn-group form-inline">
+        <button class="btn btn-primary" type="submit">Find</button>
+        {#if searchTarget}
+          <button class="btn" on:click={onReset}>Reset</button>
+        {/if}
+      </div>
     </fieldset>
   </form>
 </div>

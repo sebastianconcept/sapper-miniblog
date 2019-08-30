@@ -13,11 +13,23 @@
 </script>
 
 <style>
-
+  .sidebar-container {
+    padding: 1em;
+    background-color: #303742;
+    color: #fff;
+  }
 </style>
 
 <div class="home-page">
-  <BlogBrand />
-  <ArticleList {showPublishingState} {selection} />
-  <SidebarMenu />
+  <div class="container">
+    <div class="columns">
+      <div class="col-8 col-sm-12 float-right ">
+        <BlogBrand />
+        <ArticleList {showPublishingState} {selection} />
+      </div>
+      <div class="col-4 col-sm-12 float-left sidebar-container">
+        <SidebarMenu />
+      </div>
+    </div>
+  </div>
 </div>

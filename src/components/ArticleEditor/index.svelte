@@ -65,11 +65,13 @@
 </svelte:head>
 
 <div class="article-editor">
-  <button on:click={onClose}>Close</button>
-  <button on:click={onPreview}>Preview</button>
-  {#if article.publishedAt}
-    <button on:click={onUnpublish}>Unpublish</button>
-  {/if}
+  <div class="btn-group">
+    <button class="btn" on:click={onClose}>Close</button>
+    <button class="btn btn-primary" on:click={onPreview}>Preview</button>
+    {#if article.publishedAt}
+      <button on:click={onUnpublish}>Unpublish</button>
+    {/if}
+  </div>
   <div id="editor-container">
     <input bind:value={title} placeholder="Title" />
     <input bind:value={subtitle} placeholder="Subtitle" />

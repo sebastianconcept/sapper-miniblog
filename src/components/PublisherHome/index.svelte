@@ -19,7 +19,9 @@
     on:drafts={() => (selection = 'drafts')}
     on:published={() => (selection = 'published')}
     on:all={() => (selection = 'all')} />
-  <button class="button" on:click={() => goto('/publisher/editor/new')}>
+  <button
+    class="btn btn-primary float-right"
+    on:click={() => goto('/publisher/editor/new')}>
     New Article
   </button>
   <Search />

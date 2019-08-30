@@ -36,7 +36,11 @@
 </script>
 
 <div class="article-editor">
-  <button on:click={onEdit}>Edit</button>
-  <button on:click={onPublish}>Publish</button>
+  <div class="btn-group">
+    <button class="btn " on:click={onEdit}>Edit</button>
+    {#if !article.publishedAt}
+      <button class="btn btn-primary" on:click={onPublish}>Publish</button>
+    {/if}
+  </div>
   <Article {article} />
 </div>
