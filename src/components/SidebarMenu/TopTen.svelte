@@ -3,9 +3,7 @@
 </script>
 
 <style>
-  h4 {
-    color: #fff;
-  }
+
 </style>
 
 {#if topTenArticles}

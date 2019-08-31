@@ -5,7 +5,7 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import { goto, stores } from "@sapper/app";
-
+  import { updateSlug } from "../../routes/api/articles";
   export let article;
   export let slug;
 
@@ -51,6 +51,7 @@
 
   async function save() {
     article.title = title;
+    updateSlug(article);
     article.subtitle = subtitle;
     article.body = contentEditor.value();
     article.excerpt = excerptEditor.value();

@@ -41,7 +41,7 @@ export async function post (req, res) {
   res.end(JSON.stringify(answer))
 }
 
-function updateSlug (article) {
+export function updateSlug (article) {
   article.slug = slugify(article.title, {
     replacement: '-',
     remove: /[?¿*+~.()'"¡❞❝…;❛❜˚^!:@]/g,
