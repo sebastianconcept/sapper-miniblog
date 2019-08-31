@@ -36,10 +36,14 @@
 </script>
 
 <div class="article-preview">
-  <div class="btn-group header-bar">
-    <button class="btn" on:click={onEdit}>Edit</button>
+  <div class="header-bar">
+    <div class="btn-group ">
+      <button class="btn" on:click={onEdit}>Edit</button>
+    </div>
     {#if !article.publishedAt}
-      <button class="btn btn-primary" on:click={onPublish}>Publish</button>
+      <button class="btn btn-primary float-right" on:click={onPublish}>
+        Publish
+      </button>
     {/if}
   </div>
   <Article {article} />

@@ -25,6 +25,10 @@
       font-size: 4em;
     }
   }
+
+  .container {
+    border-bottom: 2px solid #303742;
+  }
 </style>
 
 <div class="container">

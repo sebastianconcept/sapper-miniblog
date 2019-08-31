@@ -1,11 +1,18 @@
 <script>
   import marked from "marked";
+  import ArticleMeta from "../Article/ArticleMeta";
   export let article;
   let markup;
 
   $: if (article) {
+    markup = marked(getExcerpt(article));
+  }
+
+  export function getExcerpt(article) {
     if (article.excerpt) {
-      markup = marked(article.excerpt);
+      return article.excerpt;
+    } else {
+      return article.body.split("\n")[0];
     }
   }
 </script>
@@ -15,16 +22,7 @@
 </style>
 
 <div class="article-preview">
-  <div class="article-meta">
-    <a href="/blog/${article.slug}">
-      <img src={article.image} alt={article.imageDescription} />
-    </a>
-
-    <div class="info">
-      <span class="date">{new Date(article.createdAt).toDateString()}</span>
-    </div>
-  </div>
-
+  <ArticleMeta {article} />
   <a href="/article/{article.slug}" rel="prefetch" class="preview-link">
     <h2>{article.title}</h2>
   </a>

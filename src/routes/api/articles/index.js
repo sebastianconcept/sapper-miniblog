@@ -70,10 +70,10 @@ export async function getArticles (selection, filterTarget, limit, offset) {
 }
 
 function isArticleMatch (article, filterTarget) {
-  return ['title', 'subtitle', 'body'].some(propertyName =>
+  return ['title', 'subtitle', 'body', 'excerpt'].some(propertyName =>
     !filterTarget
       ? true
-      : !!removeDiacritics(article[propertyName])
+      : !!removeDiacritics(article[propertyName] || '')
         .toLowerCase()
         .match(
           new RegExp(`.*${removeDiacritics(filterTarget).toLowerCase()}.*`)

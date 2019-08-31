@@ -37,6 +37,8 @@ h3 {
 
 .header-bar {
   margin-bottom: 1.4rem;
+  display: inline-block;
+  width: 100%;
 }
 
 .text {
@@ -53,4 +55,14 @@ h3 {
 
 .sidebar-section {
   margin-bottom: 70px;
+}
+
+.sidebar-container {
+  padding: 1em;
+  background-color: #303742;
+  color: #fff;
+}
+
+.article-container {
+  margin-top: 2em;
 }

@@ -13,19 +13,13 @@
   $: if (article) {
     markup = marked(article.body);
   }
-
-  // onMount(() => {
-  //   api.get(`articles/${slug}/comments`).then(res => {
-  //     comments = res.comments;
-  //   });
-  // });
 </script>
 
 <svelte:head>
   <title>{article.title}</title>
 </svelte:head>
 
-<div class="article-page">
+<div class="article-container">
   {#if article}
     <div class="banner">
       <div class="container">
@@ -35,7 +29,7 @@
       </div>
     </div>
 
-    <div class="container page">
+    <div class="container">
       <div class="row article-content">
         <div class="col-xs-12">
           <div class="text">
@@ -52,7 +46,11 @@
 
       <hr />
 
-      <div class="article-actions" />
+      <div class="empty">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-more-horiz" />
+        </div>
+      </div>
     </div>
   {/if}
 </div>

@@ -13,11 +13,7 @@
 </script>
 
 <style>
-  .sidebar-container {
-    padding: 1em;
-    background-color: #303742;
-    color: #fff;
-  }
+
 </style>
 
 <div class="home-page">

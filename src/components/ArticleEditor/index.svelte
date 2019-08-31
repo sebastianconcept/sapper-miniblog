@@ -3,7 +3,7 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { goto, stores } from "@sapper/app";
 
   export let article;
@@ -18,6 +18,7 @@
   let subtitle = article.subtitle || "";
   let body = article.body || "";
   let excerpt = article.excerpt || "";
+  let autosave;
 
   onMount(() => {
     import("easymde").then(module => {
@@ -30,11 +31,13 @@
       });
       contentEditor.value(body);
       excerptEditor.value(excerpt);
-      setInterval(() => {
+      autosave = setInterval(() => {
         save();
       }, autosaveDuration);
     });
   });
+
+  onDestroy(() => clearInterval(autosave));
 
   async function save() {
     article.title = title;
@@ -64,6 +67,16 @@
   }
 </script>
 
+<style>
+  .article-editor {
+    margin-top: 2em;
+  }
+
+  .form-group {
+    margin-bottom: 1.4rem;
+  }
+</style>
+
 <svelte:head>
   <title>{title || 'New Article'}</title>
   <link
@@ -72,17 +85,39 @@
 </svelte:head>
 
 <div class="article-editor">
-  <div class="btn-group">
-    <button class="btn" on:click={onClose}>Close</button>
-    <button class="btn btn-primary" on:click={onPreview}>Preview</button>
-    {#if article.publishedAt}
-      <button on:click={onUnpublish}>Unpublish</button>
-    {/if}
+  <div class="header-bar">
+    <button class="btn float-left" on:click={onClose}>Close</button>
+    <div class="btn-group float-right">
+      <button class="btn btn-primary" on:click={onPreview}>Preview</button>
+      {#if article.publishedAt}
+        <button class="btn" on:click={onUnpublish}>Unpublish</button>
+      {/if}
+    </div>
   </div>
   <div id="editor-container">
-    <input bind:value={title} placeholder="Title" />
-    <input bind:value={subtitle} placeholder="Subtitle" />
-    <textarea id="content" style="display:none;" />
-    <textarea id="excerpt" style="display:none;" />
+    <form>
+      <div class="form-group">
+        <h3>Title</h3>
+        <input
+          class="form-input input-lg"
+          bind:value={title}
+          placeholder="Title" />
+      </div>
+      <div class="form-group">
+        <h3>Subtitle</h3>
+        <input
+          class="form-input"
+          bind:value={subtitle}
+          placeholder="Subtitle" />
+      </div>
+      <div class="form-group">
+        <h3>Body</h3>
+        <textarea id="content" style="display:none;" />
+      </div>
+      <div class="form-group">
+        <h3>Excerpt</h3>
+        <textarea id="excerpt" style="display:none;" />
+      </div>
+    </form>
   </div>
 </div>

@@ -10,7 +10,9 @@
 </script>
 
 <style>
-
+  .home-page {
+    margin-top: 2em;
+  }
 </style>
 
 <div class="home-page">
