@@ -35,9 +35,9 @@
   }
 </script>
 
-<div class="article-editor">
-  <div class="btn-group">
-    <button class="btn " on:click={onEdit}>Edit</button>
+<div class="article-preview">
+  <div class="btn-group header-bar">
+    <button class="btn" on:click={onEdit}>Edit</button>
     {#if !article.publishedAt}
       <button class="btn btn-primary" on:click={onPublish}>Publish</button>
     {/if}

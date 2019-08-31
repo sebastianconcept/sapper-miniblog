@@ -1,0 +1,56 @@
+h1,
+h2,
+h3,
+h4,
+div {
+  font-family: "Roboto", sans-serif;
+  color: #303742;
+}
+
+a {
+  color: #303742 !important;
+}
+
+h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+h3 {
+  font-size: 1.5em;
+  color: #aaa;
+}
+
+.date {
+  color: #ccc;
+}
+
+.btn.btn-primary {
+  background: #303742;
+  border-color: #333;
+  color: #fff;
+}
+
+.btn {
+  border: 0.05rem solid #303742;
+  color: #303742;
+}
+
+.header-bar {
+  margin-bottom: 1.4rem;
+}
+
+.text {
+  font-family: "PT Serif", serif;
+  font-size: 1.1em;
+  margin: 1.1em 0;
+  color: #303742;
+}
+
+.article-preview {
+  padding-top: 30px;
+  padding-bottom: 35px;
+}
+
+.sidebar-section {
+  margin-bottom: 70px;
+}

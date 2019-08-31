@@ -1,6 +1,18 @@
 <script>
+  import marked from "marked";
   export let article;
+  let markup;
+
+  $: if (article) {
+    if (article.excerpt) {
+      markup = marked(article.excerpt);
+    }
+  }
 </script>
+
+<style>
+
+</style>
 
 <div class="article-preview">
   <div class="article-meta">
@@ -15,14 +27,9 @@
 
   <a href="/article/{article.slug}" rel="prefetch" class="preview-link">
     <h2>{article.title}</h2>
-    <h3>{article.subtitle}</h3>
-    <span>Read more...</span>
-
-    <!-- TODO: implement tags later -->
-    <!-- <ul class="tag-list">
-      {#each article.tags as tag}
-        <li class="tag-default tag-pill tag-outline">{tag}</li>
-      {/each}
-    </ul> -->
   </a>
+  <h3>{article.subtitle}</h3>
+  <div class="text excerpt-text">
+    {@html markup}
+  </div>
 </div>

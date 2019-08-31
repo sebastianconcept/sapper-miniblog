@@ -61,24 +61,29 @@
 </script>
 
 <style>
-  .articles {
-    list-style-type: none;
+  .container {
+    padding-right: 1.4rem;
   }
 </style>
 
-{#if articles}
-  {#if articles.length === 0}
-    <div class="article-preview">No articles are here...</div>
-  {:else}
-    <ul class="articles">
-      {#each articles as article (article.slug)}
-        <li class="article-editor-preview">
+<div class="container">
+  {#if articles}
+    {#if articles.length === 0}
+      <div class="empty">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-more-horiz" />
+        </div>
+        <p class="empty-title h5">No articles to display</p>
+      </div>
+    {:else}
+      <div class="articles">
+        {#each articles as article (article.slug)}
           <ArticlePreview {article} />
-        </li>
-      {/each}
-      <InfinitePaginator on:paginate={onPaginate} />
-    </ul>
+        {/each}
+        <InfinitePaginator on:paginate={onPaginate} />
+      </div>
+    {/if}
+  {:else}
+    <div class="loading loading-lg" />
   {/if}
-{:else}
-  <div class="loading loading-lg" />
-{/if}
+</div>

@@ -12,18 +12,24 @@
   const autosaveDuration = 10000; // 10 sec
 
   const { session } = stores();
-  let editor;
+  let contentEditor;
+  let excerptEditor;
   let title = article.title || "";
   let subtitle = article.subtitle || "";
   let body = article.body || "";
+  let excerpt = article.excerpt || "";
 
   onMount(() => {
     import("easymde").then(module => {
       const EasyMDE = module.default;
-      editor = new EasyMDE({
-        element: document.getElementById("editor")
+      contentEditor = new EasyMDE({
+        element: document.getElementById("content")
       });
-      editor.value(body);
+      excerptEditor = new EasyMDE({
+        element: document.getElementById("excerpt")
+      });
+      contentEditor.value(body);
+      excerptEditor.value(excerpt);
       setInterval(() => {
         save();
       }, autosaveDuration);
@@ -33,7 +39,8 @@
   async function save() {
     article.title = title;
     article.subtitle = subtitle;
-    article.body = editor.value();
+    article.body = contentEditor.value();
+    article.excerpt = excerptEditor.value();
     const id = await api.post("articles", article);
     if (!article._id) {
       article._id = id;
@@ -75,6 +82,7 @@
   <div id="editor-container">
     <input bind:value={title} placeholder="Title" />
     <input bind:value={subtitle} placeholder="Subtitle" />
-    <textarea id="editor" style="display:none;" />
+    <textarea id="content" style="display:none;" />
+    <textarea id="excerpt" style="display:none;" />
   </div>
 </div>

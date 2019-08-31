@@ -39,7 +39,7 @@
 <div class="publisher-search">
   <form class="" on:submit|preventDefault={onSubmit}>
     <div class="form-group">
-      <div class="input-group ">
+      <div class="input-group">
         <input
           class="form-input"
           autocomplete="off"
@@ -48,9 +48,11 @@
           placeholder="Search title, tag or content"
           on:keyup={onSearch()}
           bind:value={searchTarget} />
-        <button class="btn btn-primary " type="submit">Find</button>
+        <button class="btn btn-primary input-group-btn" type="submit">
+          <i class="icon icon-search" />
+        </button>
         <button class="btn input-group-btn" on:click|preventDefault={onReset}>
-          Reset
+          <i class="icon icon-refresh" />
         </button>
       </div>
     </div>

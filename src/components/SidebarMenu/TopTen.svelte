@@ -2,6 +2,12 @@
   export let topTenArticles;
 </script>
 
+<style>
+  h4 {
+    color: #fff;
+  }
+</style>
+
 {#if topTenArticles}
   <div className="tag-list">
     {#each topTenArticles as article}

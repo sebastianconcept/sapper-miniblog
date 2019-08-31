@@ -8,6 +8,6 @@
 
 <div class="article-meta">
   <div class="info">
-    <span class="date">{article.createdAt}</span>
+    <span class="date">{new Date(article.createdAt).toDateString()}</span>
   </div>
 </div>

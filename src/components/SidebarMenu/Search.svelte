@@ -21,22 +21,26 @@
   }
 </script>
 
-<div class="publisher-search">
-  <form on:submit|preventDefault={onSubmit}>
-    <h4>Search</h4>
-
-    <fieldset class="form-group">
-      <input
-        class="form-input "
-        type="text"
-        placeholder="Search title, tag or content"
-        bind:value={searchTarget} />
-      <div class="btn-group form-inline">
-        <button class="btn btn-primary" type="submit">Find</button>
-        {#if searchTarget}
-          <button class="btn" on:click={onReset}>Reset</button>
-        {/if}
+<section class="sidebar-section">
+  <div class="publisher-search">
+    <form class="form-group" on:submit|preventDefault={onSubmit}>
+      <div class="input-group">
+        <input
+          class="form-input"
+          type="text"
+          placeholder="Search title, tag or content"
+          bind:value={searchTarget} />
+        <div class="btn-group form-inline">
+          <button class="btn input-group-btn" type="submit">
+            <i class="icon icon-search" />
+          </button>
+          {#if searchTarget}
+            <button class="btn input-group-btn" on:click={onReset}>
+              <i class="icon icon-refresh" />
+            </button>
+          {/if}
+        </div>
       </div>
-    </fieldset>
-  </form>
-</div>
+    </form>
+  </div>
+</section>

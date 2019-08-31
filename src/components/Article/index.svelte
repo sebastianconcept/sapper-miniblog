@@ -29,15 +29,16 @@
   {#if article}
     <div class="banner">
       <div class="container">
-        <h1>{article.title}</h1>
         <ArticleMeta {article} user={$session.user} />
+        <h2>{article.title}</h2>
+        <h3>{article.subtitle}</h3>
       </div>
     </div>
 
     <div class="container page">
       <div class="row article-content">
         <div class="col-xs-12">
-          <div>
+          <div class="text">
             {@html markup}
           </div>
 
