@@ -19,6 +19,16 @@
   let body = article.body || "";
   let excerpt = article.excerpt || "";
   let autosave;
+  let canSaveNow = canSave();
+
+  $: {
+    title;
+    canSaveNow = canSave();
+  }
+
+  function canSave() {
+    return !!title;
+  }
 
   onMount(() => {
     import("easymde").then(module => {
@@ -44,9 +54,11 @@
     article.subtitle = subtitle;
     article.body = contentEditor.value();
     article.excerpt = excerptEditor.value();
-    const id = await api.post("articles", article);
-    if (!article._id) {
-      article._id = id;
+    if (canSaveNow) {
+      const id = await api.post("articles", article);
+      if (!article._id) {
+        article._id = id;
+      }
     }
   }
 
@@ -88,9 +100,16 @@
   <div class="header-bar">
     <button class="btn float-left" on:click={onClose}>Close</button>
     <div class="btn-group float-right">
-      <button class="btn btn-primary" on:click={onPreview}>Preview</button>
+      <button
+        class="btn btn-primary"
+        on:click={onPreview}
+        disabled={!canSaveNow}>
+        Preview
+      </button>
       {#if article.publishedAt}
-        <button class="btn" on:click={onUnpublish}>Unpublish</button>
+        <button class="btn" on:click={onUnpublish} disabled={!canSaveNow}>
+          Unpublish
+        </button>
       {/if}
     </div>
   </div>

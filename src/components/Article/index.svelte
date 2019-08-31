@@ -15,10 +15,15 @@
   }
 </script>
 
+<style>
+  .container {
+    padding-right: 1.4rem;
+  }
+</style>
+
 <svelte:head>
   <title>{article.title}</title>
 </svelte:head>
-
 <div class="article-container">
   {#if article}
     <div class="banner">

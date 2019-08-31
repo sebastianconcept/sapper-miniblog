@@ -41,17 +41,19 @@
     <div class="form-group">
       <div class="input-group">
         <input
-          class="form-input"
+          class="form-input input-lg"
           autocomplete="off"
           type="text"
           name="search"
           placeholder="Search title, tag or content"
           on:keyup={onSearch()}
           bind:value={searchTarget} />
-        <button class="btn btn-primary input-group-btn" type="submit">
+        <button class="btn btn-lg btn-primary input-group-btn" type="submit">
           <i class="icon icon-search" />
         </button>
-        <button class="btn input-group-btn" on:click|preventDefault={onReset}>
+        <button
+          class="btn btn-lg input-group-btn"
+          on:click|preventDefault={onReset}>
           <i class="icon icon-refresh" />
         </button>
       </div>
