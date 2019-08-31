@@ -6,6 +6,7 @@
   import { onMount, onDestroy } from "svelte";
   import { goto, stores } from "@sapper/app";
   import { updateSlug } from "../../routes/api/articles";
+
   export let article;
   export let slug;
 
@@ -73,6 +74,14 @@
     goto(`/publisher/preview/${article.slug}`);
   }
 
+  async function onDelete() {
+    const confirmed = confirm("Delete this article? (no undo)");
+    if (confirmed) {
+      api.del(`articles?id=${article._id}`);
+      goto(`/publisher`);
+    }
+  }
+
   function onUnpublish() {
     delete article.publishedAt;
     save();
@@ -83,6 +92,7 @@
 <style>
   .article-editor {
     margin-top: 2em;
+    margin-bottom: 4em;
   }
 
   .form-group {
@@ -92,23 +102,26 @@
 
 <svelte:head>
   <title>{title || 'New Article'}</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/easymde/dist/easymde.min.css" />
+  <link rel="stylesheet" href="easymde.min.css" />
 </svelte:head>
 
 <div class="article-editor">
   <div class="header-bar">
-    <button class="btn float-left" on:click={onClose}>Close</button>
+    <button class="btn float-left" on:click|preventDefault={onClose}>
+      Close
+    </button>
     <div class="btn-group float-right">
       <button
         class="btn btn-primary"
-        on:click={onPreview}
+        on:click|preventDefault={onPreview}
         disabled={!canSaveNow}>
         Preview
       </button>
       {#if article.publishedAt}
-        <button class="btn" on:click={onUnpublish} disabled={!canSaveNow}>
+        <button
+          class="btn"
+          on:click|preventDefault={onUnpublish}
+          disabled={!canSaveNow}>
           Unpublish
         </button>
       {/if}
@@ -138,6 +151,13 @@
         <h3>Excerpt</h3>
         <textarea id="excerpt" style="display:none;" />
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <button class="btn btn-primary col-12" on:click|preventDefault={onDelete}>
+        Delete
+      </button>
     </form>
   </div>
 </div>

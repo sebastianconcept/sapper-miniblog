@@ -24,7 +24,6 @@
   function onPublish() {
     const confirmed = confirm("Publish?");
     if (confirmed) {
-      console.log("publishing");
       publish();
     }
   }
@@ -41,7 +40,9 @@
       <button class="btn" on:click={onEdit}>Edit</button>
     </div>
     {#if !article.publishedAt}
-      <button class="btn btn-primary float-right" on:click={onPublish}>
+      <button
+        class="btn btn-primary float-right"
+        on:click|preventDefault={onPublish}>
         Publish
       </button>
     {/if}
