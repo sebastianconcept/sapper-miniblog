@@ -66,3 +66,8 @@ h3 {
 .article-container {
   margin-top: 2em;
 }
+
+:root {
+  --primary-color: #2967af;
+  --dark-color: #395d6b;
+}

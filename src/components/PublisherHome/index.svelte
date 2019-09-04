@@ -13,6 +13,10 @@
   .home-page {
     margin-top: 2em;
   }
+
+  .download-btn {
+    margin-right: 0.4rem;
+  }
 </style>
 
 <div class="home-page">
@@ -27,6 +31,9 @@
       on:click={() => goto('/publisher/editor/new')}>
       New Article
     </button>
+    <a class="btn float-right download-btn" href="api/articles/all" download>
+      Download articles
+    </a>
     <Search />
   </div>
   <ArticleList {selection} />
