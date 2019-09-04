@@ -155,7 +155,9 @@
       <br />
       <br />
       <br />
-      <button class="btn btn-primary col-12" on:click|preventDefault={onDelete}>
+      <button
+        class="btn btn-primary col-12 warning"
+        on:click|preventDefault={onDelete}>
         Delete
       </button>
     </form>
