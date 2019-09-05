@@ -4,7 +4,6 @@
 
 <style>
   h1,
-  figure,
   p {
     text-align: center;
     margin: 0 auto;
@@ -14,17 +13,7 @@
     font-size: 2.8em;
     text-transform: uppercase;
     font-weight: 700;
-    margin: 0 0 0.5em 0;
-  }
-
-  figure {
-    margin: 0 0 1em 0;
-  }
-
-  img {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 0 1em 0;
+    margin: 1em 0 0.5em 0;
   }
 
   p {
@@ -36,9 +25,13 @@
       font-size: 4em;
     }
   }
+
+  .container {
+    border-bottom: 2px solid #303742;
+  }
 </style>
 
 <div class="container">
   <h1 class="logo-font">Miniblog</h1>
-  <p>A place to share your knowledge.</p>
+  <p>A medium to share your knowledge.</p>
 </div>

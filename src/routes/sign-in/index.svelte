@@ -26,41 +26,57 @@
   }
 </script>
 
+<style>
+  .sign-in-container {
+    margin-top: 4em;
+  }
+</style>
+
 <svelte:head>
   <title>Sign in • miniblog</title>
 </svelte:head>
+<div class="container grid-lg sign-in-container">
+  <div class="columns">
+    <div class="column col-xs-6 ">
+      <form on:submit|preventDefault={submit}>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <h1 class="text-xs-center">Sign In</h1>
+            </div>
+          </div>
+          <div class="panel-body">
+            <ListErrors {errors} />
+            <fieldset class="form-group">
+              <label class="form-label" for="email">E-Mail</label>
+              <input
+                class="form-input"
+                type="email"
+                name="email"
+                placeholder="Email"
+                bind:value={email} />
+            </fieldset>
+            <fieldset class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <input
+                class="form-input"
+                type="password"
+                name="password"
+                placeholder="Password"
+                bind:value={password} />
+            </fieldset>
+          </div>
+          <div class="panel-footer">
+            <button
+              class="btn btn-lg btn-primary pull-xs-right"
+              type="submit"
+              disabled={!email || !password}>
+              Sign in
+            </button>
+          </div>
 
-<div class="auth-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Sign In</h1>
-
-        <ListErrors {errors} />
-
-        <form on:submit|preventDefault={submit}>
-          <fieldset class="form-group">
-            <input
-              class="form-control form-control-lg"
-              type="email"
-              placeholder="Email"
-              bind:value={email} />
-          </fieldset>
-          <fieldset class="form-group">
-            <input
-              class="form-control form-control-lg"
-              type="password"
-              placeholder="Password"
-              bind:value={password} />
-          </fieldset>
-          <button
-            class="btn btn-lg btn-primary pull-xs-right"
-            type="submit"
-            disabled={!email || !password}>
-            Sign in
-          </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

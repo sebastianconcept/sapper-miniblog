@@ -3,8 +3,9 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { goto, stores } from "@sapper/app";
+  import { updateSlug } from "../../routes/api/articles";
 
   export let article;
   export let slug;
@@ -12,31 +13,54 @@
   const autosaveDuration = 10000; // 10 sec
 
   const { session } = stores();
-  let editor;
+  let contentEditor;
+  let excerptEditor;
   let title = article.title || "";
   let subtitle = article.subtitle || "";
   let body = article.body || "";
+  let excerpt = article.excerpt || "";
+  let autosave;
+  let canSaveNow = canSave();
+
+  $: {
+    title;
+    canSaveNow = canSave();
+  }
+
+  function canSave() {
+    return !!title;
+  }
 
   onMount(() => {
     import("easymde").then(module => {
       const EasyMDE = module.default;
-      editor = new EasyMDE({
-        element: document.getElementById("editor")
+      contentEditor = new EasyMDE({
+        element: document.getElementById("content")
       });
-      editor.value(body);
-      setInterval(() => {
+      excerptEditor = new EasyMDE({
+        element: document.getElementById("excerpt")
+      });
+      contentEditor.value(body);
+      excerptEditor.value(excerpt);
+      autosave = setInterval(() => {
         save();
       }, autosaveDuration);
     });
   });
 
+  onDestroy(() => clearInterval(autosave));
+
   async function save() {
     article.title = title;
+    updateSlug(article);
     article.subtitle = subtitle;
-    article.body = editor.value();
-    const id = await api.post("articles", article);
-    if (!article._id) {
-      article._id = id;
+    article.body = contentEditor.value();
+    article.excerpt = excerptEditor.value();
+    if (canSaveNow) {
+      const id = await api.post("articles", article);
+      if (!article._id) {
+        article._id = id;
+      }
     }
   }
 
@@ -50,6 +74,14 @@
     goto(`/publisher/preview/${article.slug}`);
   }
 
+  async function onDelete() {
+    const confirmed = confirm("Delete this article? (no undo)");
+    if (confirmed) {
+      api.del(`articles?id=${article._id}`);
+      goto(`/publisher`);
+    }
+  }
+
   function onUnpublish() {
     delete article.publishedAt;
     save();
@@ -57,22 +89,77 @@
   }
 </script>
 
+<style>
+  .article-editor {
+    margin-top: 2em;
+    margin-bottom: 4em;
+  }
+
+  .form-group {
+    margin-bottom: 1.4rem;
+  }
+</style>
+
 <svelte:head>
   <title>{title || 'New Article'}</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/easymde/dist/easymde.min.css" />
+  <link rel="stylesheet" href="easymde.min.css" />
 </svelte:head>
 
 <div class="article-editor">
-  <button on:click={onClose}>Close</button>
-  <button on:click={onPreview}>Preview</button>
-  {#if article.publishedAt}
-    <button on:click={onUnpublish}>Unpublish</button>
-  {/if}
+  <div class="header-bar">
+    <button class="btn float-left" on:click|preventDefault={onClose}>
+      Close
+    </button>
+    <div class="btn-group float-right">
+      <button
+        class="btn btn-primary"
+        on:click|preventDefault={onPreview}
+        disabled={!canSaveNow}>
+        Preview
+      </button>
+      {#if article.publishedAt}
+        <button
+          class="btn"
+          on:click|preventDefault={onUnpublish}
+          disabled={!canSaveNow}>
+          Unpublish
+        </button>
+      {/if}
+    </div>
+  </div>
   <div id="editor-container">
-    <input bind:value={title} placeholder="Title" />
-    <input bind:value={subtitle} placeholder="Subtitle" />
-    <textarea id="editor" style="display:none;" />
+    <form>
+      <div class="form-group">
+        <h3>Title</h3>
+        <input
+          class="form-input input-lg"
+          bind:value={title}
+          placeholder="Title" />
+      </div>
+      <div class="form-group">
+        <h3>Subtitle</h3>
+        <input
+          class="form-input"
+          bind:value={subtitle}
+          placeholder="Subtitle" />
+      </div>
+      <div class="form-group">
+        <h3>Body</h3>
+        <textarea id="content" style="display:none;" />
+      </div>
+      <div class="form-group">
+        <h3>Excerpt</h3>
+        <textarea id="excerpt" style="display:none;" />
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <button
+        class="btn btn-primary col-12 warning"
+        on:click|preventDefault={onDelete}>
+        Delete
+      </button>
+    </form>
   </div>
 </div>

@@ -2,6 +2,10 @@
   export let topTenArticles;
 </script>
 
+<style>
+
+</style>
+
 {#if topTenArticles}
   <div className="tag-list">
     {#each topTenArticles as article}

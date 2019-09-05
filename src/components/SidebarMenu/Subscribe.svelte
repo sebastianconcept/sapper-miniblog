@@ -8,6 +8,12 @@
   }
 </script>
 
+<style>
+  h4 {
+    color: #fff;
+  }
+</style>
+
 <div class="publisher-search">
   <form on:submit|preventDefault={onSubmit}>
     <h4>Subscribe</h4>

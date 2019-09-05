@@ -41,7 +41,13 @@ export async function post (req, res) {
   res.end(JSON.stringify(answer))
 }
 
-function updateSlug (article) {
+export async function del (req, res) {
+  const articleId = req.query.id
+  await db.articles.remove({ _id: articleId })
+  res.send(true)
+}
+
+export function updateSlug (article) {
   article.slug = slugify(article.title, {
     replacement: '-',
     remove: /[?¿*+~.()'"¡❞❝…;❛❜˚^!:@]/g,
@@ -70,10 +76,10 @@ export async function getArticles (selection, filterTarget, limit, offset) {
 }
 
 function isArticleMatch (article, filterTarget) {
-  return ['title', 'subtitle', 'body'].some(propertyName =>
+  return ['title', 'subtitle', 'body', 'excerpt'].some(propertyName =>
     !filterTarget
       ? true
-      : !!removeDiacritics(article[propertyName])
+      : !!removeDiacritics(article[propertyName] || '')
         .toLowerCase()
         .match(
           new RegExp(`.*${removeDiacritics(filterTarget).toLowerCase()}.*`)

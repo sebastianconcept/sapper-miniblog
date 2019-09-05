@@ -9,14 +9,6 @@
 
 </style>
 
-<ul>
-  <li>
-    <button on:click={() => dispatch('published')}>Published</button>
-  </li>
-  <li>
-    <button on:click={() => dispatch('drafts')}>Drafts</button>
-  </li>
-  <li>
-    <button on:click={() => dispatch('all')}>All</button>
-  </li>
-</ul>
+<button on:click={() => dispatch('published')}>Published</button>
+<button on:click={() => dispatch('drafts')}>Drafts</button>
+<button on:click={() => dispatch('all')}>All</button>

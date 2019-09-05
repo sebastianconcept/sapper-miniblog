@@ -30,17 +30,33 @@
   }
 </script>
 
+<style>
+  .publisher-search {
+    margin: 2em 0;
+  }
+</style>
+
 <div class="publisher-search">
-  <form on:submit|preventDefault={onSubmit}>
-    <fieldset class="form-group">
-      <input
-        class="form-control form-control-lg"
-        type="text"
-        placeholder="Search title, tag or content"
-        on:keyup={onSearch()}
-        bind:value={searchTarget} />
-      <button>Find</button>
-      <button on:click|preventDefault={onReset}>Reset</button>
-    </fieldset>
+  <form class="" on:submit|preventDefault={onSubmit}>
+    <div class="form-group">
+      <div class="input-group">
+        <input
+          class="form-input input-lg"
+          autocomplete="off"
+          type="text"
+          name="search"
+          placeholder="Search title, tag or content"
+          on:keyup={onSearch()}
+          bind:value={searchTarget} />
+        <button class="btn btn-lg btn-primary input-group-btn" type="submit">
+          <i class="icon icon-search" />
+        </button>
+        <button
+          class="btn btn-lg input-group-btn"
+          on:click|preventDefault={onReset}>
+          <i class="icon icon-refresh" />
+        </button>
+      </div>
+    </div>
   </form>
 </div>

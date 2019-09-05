@@ -71,21 +71,30 @@
   }
 </script>
 
+<style>
+
+</style>
+
 <div class="container">
   {#if articles}
     {#if articles.length === 0}
-      <div class="article-preview">No articles are here...</div>
+      <div class="empty">
+        <div class="empty-icon">
+          <i class="icon icon-3x icon-more-horiz" />
+        </div>
+        <p class="empty-title h5">No articles to display</p>
+      </div>
     {:else}
-      <ul class="">
-        {#each articles as article}
-          <li class="article-editor-preview">
+      <div class="">
+        {#if articles.length}
+          {#each articles as article}
             <ArticlePreview {article} />
-          </li>
-        {/each}
-        <InfinitePaginator on:paginate={onPaginate} />
-      </ul>
+          {/each}
+          <InfinitePaginator on:paginate={onPaginate} />
+        {/if}
+      </div>
     {/if}
   {:else}
-    <p>Loading articles...</p>
+    <div class="loading loading-lg" />
   {/if}
 </div>

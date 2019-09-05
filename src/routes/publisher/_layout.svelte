@@ -18,16 +18,15 @@
 <style>
   main {
     position: relative;
-    max-width: 56em;
+    max-width: 66em;
     background-color: white;
-    padding: 2em;
     margin: 0 auto;
     box-sizing: border-box;
   }
 </style>
 
 <!-- {#if preloading}
-  <div>Loading...</div>
+  <div class="loading loading-lg" />
 {/if} -->
 
 <main>
