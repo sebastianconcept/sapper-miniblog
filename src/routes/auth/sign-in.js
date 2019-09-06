@@ -1,5 +1,5 @@
-const validEmail = process.env.BLOG_EMAIL || 'guy@example.com'
-const validPassword = process.env.BLOG_PASSWORD || '123456'
+const validEmail = process.env.MINIBLOG_USERNAME || 'guy@example.com'
+const validPassword = process.env.MINIBLOG_PASSWORD || '123456'
 
 export function post (req, res) {
   const credentials = req.body

@@ -1,0 +1,16 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "yourAWS_ID.dkr.ecr.us-west-2.amazonaws.com/miniblog:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 3001,
+      "HostPort": 8000
+    }
+  ],
+  "Volumes": [],
+  "Logging": "/var/log/miniblog",
+  "Command": "/opt/start"
+}

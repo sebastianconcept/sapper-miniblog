@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker run -it \
+-e NODE_ENV=$(echo $NODE_ENV) \
+-e MINIBLOG_PASSWORD=$(echo $MINIBLOG_PASSWORD) \
+-e MINIBLOG_USERNAME=$(echo $MINIBLOG_USERNAME) \
+-p $MINIBLOG_PORT:$(echo $MINIBLOG_PORT) miniblog:latest /bin/bash
