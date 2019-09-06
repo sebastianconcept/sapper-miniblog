@@ -1,12 +1,12 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "yourAWS_ID.dkr.ecr.us-west-2.amazonaws.com/miniblog:latest",
+    "Name": "565132573793.dkr.ecr.us-west-2.amazonaws.com/seb-miniblog:latest",
     "Update": "true"
   },
   "Ports": [
     {
-      "ContainerPort": 3001,
+      "ContainerPort": 3000,
       "HostPort": 8000
     }
   ],

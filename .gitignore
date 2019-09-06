@@ -7,7 +7,6 @@ yarn-error.log
 .sessions
 db/
 
-Dockerrun.aws.json
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
