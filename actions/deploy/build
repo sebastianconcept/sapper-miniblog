@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BASENAME=miniblog
+LABEL=$EB_ZONE/$BASENAME
+docker build -f ./actions/deploy/Dockerfile -t $BASENAME .
+#docker tag $LABEL $BASENAME:latest

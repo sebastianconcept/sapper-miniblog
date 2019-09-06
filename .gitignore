@@ -6,3 +6,9 @@ yarn-error.log
 /__sapper__/
 .sessions
 db/
+
+Dockerrun.aws.json
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
