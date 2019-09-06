@@ -1,5 +1,5 @@
 // const base = 'https://conduit.productionready.io/api'
-const base = 'http://localhost:3000/api'
+const base = 'api'
 
 function send ({ method, path, data, token }) {
   const fetch = process.browser ? window.fetch : require('node-fetch').default
