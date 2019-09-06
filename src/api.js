@@ -1,4 +1,3 @@
-// const base = 'https://conduit.productionready.io/api'
 const base = 'api'
 
 function send ({ method, path, data, token }) {
