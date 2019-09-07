@@ -65,7 +65,13 @@ export async function getArticles (selection, filterTarget, limit, offset) {
     query = { publishedAt: { $exists: false } }
   }
   const all = await db.articles.find(query)
-  const articles = all.filter(article => isArticleMatch(article, filterTarget))
+  const articles = all
+    .filter(article => isArticleMatch(article, filterTarget))
+    .sort(function (a, b) {
+      return a.publishedAt
+        ? new Date(b.publishedAt) - new Date(a.publishedAt)
+        : new Date(b.modifiedAt) - new Date(a.modifiedAt)
+    })
   const start = offset
   const end = start + limit
   const filteredArticles = articles.slice(start, end)

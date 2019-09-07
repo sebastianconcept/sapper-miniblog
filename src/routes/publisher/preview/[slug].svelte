@@ -29,7 +29,10 @@
   }
 
   function publish() {
-    article.publishedAt = new Date();
+    if (!article.publishedAt) {
+      article.publishedAt = new Date().toDateInputValue();
+    }
+
     api.post("articles", article);
   }
 </script>

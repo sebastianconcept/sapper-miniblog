@@ -4,6 +4,8 @@
 
   export let article;
 
+  let date = article.publishedAt || article.createdAt;
+
   function words() {
     return article.body.split(" ").length;
   }
@@ -23,7 +25,7 @@
 
 <div class="article-meta">
   <div class="info float-left">
-    <span class="date">{new Date(article.createdAt).toDateString()}</span>
+    <span class="date">{new Date(date).toDateString()}</span>
   </div>
 
   <div class="quantity-of-words float-right">{words()} words</div>
