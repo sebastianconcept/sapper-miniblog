@@ -19,6 +19,8 @@
   let subtitle = article.subtitle || "";
   let body = article.body || "";
   let excerpt = article.excerpt || "";
+  let publishedAt = article.publishedAt || "";
+
   let autosave;
   let canSaveNow = canSave();
 
@@ -56,6 +58,11 @@
     article.subtitle = subtitle;
     article.body = contentEditor.value();
     article.excerpt = excerptEditor.value();
+
+    if (publishedAt) {
+      article.publishedAt = publishedAt;
+    }
+
     if (canSaveNow) {
       const id = await api.post("articles", article);
       if (!article._id) {
@@ -83,6 +90,7 @@
   }
 
   function onUnpublish() {
+    publishedAt = undefined;
     delete article.publishedAt;
     save();
     goto(`/publisher`);
@@ -150,6 +158,15 @@
       <div class="form-group">
         <h3>Excerpt</h3>
         <textarea id="excerpt" style="display:none;" />
+      </div>
+      <div class="form-group">
+        <h3>Publication date</h3>
+        <input
+          class="form-input"
+          type="date"
+          bind:value={publishedAt}
+          value={publishedAt}
+          placeholder="Publication date" />
       </div>
       <br />
       <br />
