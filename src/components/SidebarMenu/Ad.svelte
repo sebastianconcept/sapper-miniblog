@@ -10,12 +10,13 @@
   p {
     color: #fff;
   }
+
+  .sidebar-ad {
+    height: 250px;
+    width: 250px;
+  }
 </style>
 
 <section class="sidebar-section">
-  <h4>About</h4>
-  <p>
-    A blog to share thoughts worth spreading, and some discoveries and insigths
-    as I go.
-  </p>
+  <div data-unit="side250x250" class="sidebar-ad" />
 </section>

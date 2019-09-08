@@ -4,6 +4,7 @@
   import marked from "marked";
 
   import ArticleMeta from "./ArticleMeta.svelte";
+  import Ad from "./Ad.svelte";
 
   export let article;
   let markup;
@@ -25,6 +26,7 @@
   <title>{article.title}</title>
 </svelte:head>
 <div class="article-container">
+  <Ad />
   {#if article}
     <div class="banner">
       <div class="container">

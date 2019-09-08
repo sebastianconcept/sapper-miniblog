@@ -5,7 +5,6 @@ yarn-error.log
 /cypress/screenshots/
 /__sapper__/
 .sessions
-db/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

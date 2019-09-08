@@ -71,3 +71,9 @@ h3 {
   --primary-color: #2967af;
   --dark-color: #395d6b;
 }
+
+.article-preview img,
+.article-content img {
+  max-width: 90%;
+  margin: 1em;
+}

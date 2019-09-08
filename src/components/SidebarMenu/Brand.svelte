@@ -11,5 +11,5 @@
 </style>
 
 <section class="sidebar-section">
-  <h2>Brand</h2>
+  <h2>Seb's Blog</h2>
 </section>
