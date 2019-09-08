@@ -12,6 +12,12 @@
   import { stores } from "@sapper/app";
   import * as api from "../../../api.js";
 
+  import hljs from "highlight.js/lib/highlight";
+  import javascript from "highlight.js/lib/languages/javascript";
+
+  hljs.registerLanguage("javascript", javascript);
+  hljs.initHighlightingOnLoad();
+
   export let selection = "published";
   export let filter = "";
   export let currentPage = 1;

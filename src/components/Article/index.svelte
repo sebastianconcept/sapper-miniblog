@@ -6,6 +6,14 @@
   import ArticleMeta from "./ArticleMeta.svelte";
   import Ad from "./Ad.svelte";
 
+  import hljs from "highlight.js/lib/highlight";
+  import javascript from "highlight.js/lib/languages/javascript";
+  import smalltalk from "highlight.js/lib/languages/smalltalk";
+
+  hljs.registerLanguage("javascript", javascript);
+  hljs.registerLanguage("smalltalk", smalltalk);
+  hljs.initHighlightingOnLoad();
+
   export let article;
   let markup;
 

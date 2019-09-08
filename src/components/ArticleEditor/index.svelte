@@ -37,9 +37,11 @@
     import("easymde").then(module => {
       const EasyMDE = module.default;
       contentEditor = new EasyMDE({
+        showIcons: ["code"],
         element: document.getElementById("content")
       });
       excerptEditor = new EasyMDE({
+        showIcons: ["code"],
         element: document.getElementById("excerpt")
       });
       contentEditor.value(body);

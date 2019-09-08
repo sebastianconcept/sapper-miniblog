@@ -1,5 +1,6 @@
 <script>
   import marked from "marked";
+
   import ArticleMeta from "../Article/ArticleMeta";
   export let article;
   let markup;

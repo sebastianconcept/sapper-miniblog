@@ -3,6 +3,11 @@
   import ArticlePreview from "./ArticlePreview.svelte";
   import InfinitePaginator from "../InfinitePaginator";
   import * as api from "../../api.js";
+  import hljs from "highlight.js/lib/highlight";
+  import javascript from "highlight.js/lib/languages/javascript";
+
+  hljs.registerLanguage("javascript", javascript);
+  hljs.initHighlightingOnLoad();
 
   export let currentPage = 1;
   let isLastPage = false;
