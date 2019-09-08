@@ -36,5 +36,30 @@
 	     and anything else it needs to hydrate the app and
 	     initialise the router -->
     %sapper.scripts%
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-144754256-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-144754256-1");
+    </script>
+
+    <script
+      async
+      src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7718689099586813",
+        enable_page_level_ads: true,
+      });
+    </script>
   </body>
 </html>

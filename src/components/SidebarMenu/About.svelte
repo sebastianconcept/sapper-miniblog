@@ -15,7 +15,11 @@
 <section class="sidebar-section">
   <h4>About</h4>
   <p>
-    A blog to share thoughts worth spreading, and some discoveries and insigths
-    as I go.
+    Here I occasionaly share thoughts I think are worth spreading, and some
+    discoveries and insigths.
+  </p>
+  <p>
+    Here is my
+    <a href="http://sebastiansastre.co">developer story</a>
   </p>
 </section>

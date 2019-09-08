@@ -20,7 +20,7 @@
   <div class="container">
     <div class="columns">
       <div class="col-8 col-sm-12 float-right ">
-        <BlogBrand />
+        <!-- <BlogBrand /> -->
         <ArticleList {showPublishingState} {selection} />
       </div>
       <div class="col-4 col-sm-12 float-left sidebar-container">

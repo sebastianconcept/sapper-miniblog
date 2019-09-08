@@ -77,3 +77,11 @@ h3 {
   max-width: 90%;
   margin: 1em;
 }
+
+.sidebar-section a {
+  color: #5f89b9;
+}
+
+.sidebar-section a:hover {
+  color: #73a5df;
+}
