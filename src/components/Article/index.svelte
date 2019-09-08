@@ -12,7 +12,8 @@
 
   hljs.registerLanguage("javascript", javascript);
   hljs.registerLanguage("smalltalk", smalltalk);
-  hljs.initHighlightingOnLoad();
+
+  onMount(() => hljs.initHighlightingOnLoad());
 
   export let article;
   let markup;

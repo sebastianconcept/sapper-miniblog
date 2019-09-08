@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { stores } from "@sapper/app";
   import ArticlePreview from "./ArticlePreview.svelte";
   import InfinitePaginator from "../InfinitePaginator";
@@ -7,8 +8,7 @@
   import javascript from "highlight.js/lib/languages/javascript";
 
   hljs.registerLanguage("javascript", javascript);
-  hljs.initHighlightingOnLoad();
-
+  onMount(() => hljs.initHighlightingOnLoad());
   export let currentPage = 1;
   let isLastPage = false;
 

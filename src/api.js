@@ -1,4 +1,6 @@
-const base = 'api'
+const environmentConfig = require('./config/environment')
+const config = environmentConfig.get(process.env.NODE_ENV || 'production')
+const base = `${config.baseUrl}/api`
 
 function send ({ method, path, data, token }) {
   const fetch = process.browser ? window.fetch : require('node-fetch').default

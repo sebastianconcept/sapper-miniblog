@@ -6,6 +6,7 @@
 </script>
 
 <script>
+  import { onMount } from "svelte";
   import InfinitePaginator from "../../InfinitePaginator";
   import ArticlePreview from "./ArticlePreview";
 
@@ -16,7 +17,7 @@
   import javascript from "highlight.js/lib/languages/javascript";
 
   hljs.registerLanguage("javascript", javascript);
-  hljs.initHighlightingOnLoad();
+  onMount(() => hljs.initHighlightingOnLoad());
 
   export let selection = "published";
   export let filter = "";
