@@ -5,3 +5,8 @@ LABEL=$EB_ZONE/$BASENAME
 PUBLISHINGNAME=$LABEL:latest
 docker build -f ./actions/deploy/Dockerfile -t $BASENAME .
 docker tag $BASENAME:latest $PUBLISHINGNAME
+
+# Login to AWS registry
+$(aws ecr get-login --no-include-email)
+
+docker push $PUBLISHINGNAME
