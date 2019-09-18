@@ -7,8 +7,8 @@ module.exports = {
 function getEnvironment () {
   return {
     production: {
-      // baseUrl: `https://blog.sebastiansastre.co`
-      baseUrl: `https://sebastiansastre.co`
+      baseUrl: `https://blog.sebastiansastre.co`
+      // baseUrl: `https://sebastiansastre.co`
     },
     development: {
       baseUrl: `http://localhost:3000`
