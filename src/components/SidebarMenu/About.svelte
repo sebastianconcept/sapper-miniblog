@@ -22,6 +22,6 @@
   <p>Also, some discoveries and insigths.</p>
   <p>
     Here is my
-    <a href="http://about.sebastiansastre.co">developer story</a>
+    <a href="//sebastiansastre.co">developer story</a>
   </p>
 </section>

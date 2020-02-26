@@ -9,6 +9,7 @@ function send ({ method, path, data, token }) {
 
   if (data) {
     opts.headers['Content-Type'] = 'application/json'
+    opts.headers['Access-Control-Allow-Origin'] = '*'
     opts.body = JSON.stringify(data)
   }
 

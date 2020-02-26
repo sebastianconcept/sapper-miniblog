@@ -6,13 +6,15 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import sessionFileStore from 'session-file-store'
 import * as sapper from '@sapper/server'
-import { db } from './db'
 
 const app = express()
 const FileStore = sessionFileStore(session)
 
-const { PORT, NODE_ENV } = process.env
+const { NODE_ENV } = process.env
+const PORT = process.env.PORT || 8080
 const dev = NODE_ENV === 'development'
+const environmentConfig = require('./config/environment')
+const config = environmentConfig.get(process.env.NODE_ENV || 'production')
 
 function hasSignedIn (req) {
   return req.session.user && req.cookies.uid
@@ -60,6 +62,16 @@ app
     if (req.cookies.uid && !req.session.user) {
       res.clearCookie('uid')
     }
+    next()
+  })
+  /** Add CORS */
+  .use((req, res, next) => {
+    // update to match the domain you will make the request from
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    )
     next()
   })
   .listen(PORT, err => {
